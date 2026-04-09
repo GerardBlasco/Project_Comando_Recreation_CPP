@@ -10,6 +10,12 @@ Player::Player(Scene* myScene):Actor(myScene)
 	// ESTO SON INPUTS
 	InputSystem::Map("Horizontal")->AddListener(this, &Player::MoveHorizontal);
 	InputSystem::Map("Vertical")->AddListener(this, &Player::MoveVertical);
+	InputSystem::Map("Attack")->AddListener(this, &Player::Shoot, InputEvent::Triggered);
+}
+
+void Player::Update() 
+{
+	
 }
 
 void Player::MoveHorizontal()
@@ -20,4 +26,9 @@ void Player::MoveHorizontal()
 void Player::MoveVertical()
 {
 	transform.position.y += InputSystem::Map("Vertical")->ReadFloat() * 0.1f;
+}
+
+void Player::Shoot()
+{
+	std::cout << "Player Shot!" << std::endl;
 }

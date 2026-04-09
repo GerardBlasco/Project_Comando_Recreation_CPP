@@ -12,12 +12,15 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 
 	InputSystem::CreateMap("Horizontal");
 	InputSystem::CreateMap("Vertical");
+	InputSystem::CreateMap("Attack");
 
 	InputSystem::Map("Horizontal")->AddBinding(SDLK_D);
 	InputSystem::Map("Horizontal")->AddBinding(SDLK_A, true);
 
 	InputSystem::Map("Vertical")->AddBinding(SDLK_W, true);
 	InputSystem::Map("Vertical")->AddBinding(SDLK_S);
+
+	InputSystem::Map("Attack")->AddBinding(SDL_BUTTON_LEFT);
 
 	Player* player = new Player(this);
 

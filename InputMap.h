@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL3/SDL.h"
+#include "InputEvent.h"
 #include <vector>
 #include <map>
 #include <functional>
@@ -16,8 +17,8 @@ public:
 	void RemoveBinding(SDL_Keycode key);
 
 	template<class T>
-	void AddListener(T* object, void (T::* function)()) {
-		listeners.push_back([object, function]() {
+	void AddListener(T* object, void (T::* function)(), InputEvent event = InputEvent::Performed) {
+		listeners[event].push_back([object, function]() {
 			(object->*function)();
 		});
 	}
@@ -31,9 +32,10 @@ private:
 	float value = 0;
 
 	std::map<SDL_Keycode, float> keys;
-	std::vector<std::function<void()>> listeners;
+	//std::vector<std::function<void()>> listeners;
+	std::map<InputEvent, std::vector<std::function<void()>>> listeners;
 
-	void AddListener(std::function<void()> function);
+	void AddListener(std::function<void()> function, InputEvent event = InputEvent::Performed);
 	void ExecuteListeners();
 
 	void ToggleTrigger();

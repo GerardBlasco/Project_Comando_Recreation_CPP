@@ -16,7 +16,7 @@ public:
 private:
 	int score;
 
-	//void Update();
+	void Update();
 
 	void MoveHorizontal();
 	void MoveVertical();
