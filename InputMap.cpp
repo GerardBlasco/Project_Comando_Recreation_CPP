@@ -27,40 +27,46 @@ void InputMap::RemoveBinding(SDL_Keycode key)
     keys.erase(key);
 }
 
-void InputMap::ExecuteListeners()
+void InputMap::ExecuteListeners(InputEvent type)
 {
-    /*for (std::function<void()> function : listeners) {
+    for (std::function<void()> function : listeners[type]) {
         function();
-    }*/
-
-    for (std::function<void()> function : listeners[InputEvent::Performed]) {
-        function();
-    }
-
-    if (triggered) {
-        for (std::function<void()> function : listeners[InputEvent::Triggered]) {
-            function();
-        }
     }
 }
 
 void InputMap::CheckIfKeyPressed(std::map<int, bool>& keyDown)
 {
+    bool keyPressed = false;
+
+    cancelled = false;
+
     for (auto& key : keys)
     {
         if (keyDown[key.first])
         {
+            keyPressed = true;
+
             ToggleTrigger();
 
             performed = true;
             value = key.second;
 
-            ExecuteListeners();
+            ExecuteListeners(InputEvent::Performed);
+
+            if (triggered) {
+                ExecuteListeners(InputEvent::Triggered);
+            }
+
             break;
         }
-        else {
-            canTrigger = true;
 
+        if (!keyPressed) {
+            if (performed) {
+                cancelled = true;
+                ExecuteListeners(InputEvent::Cancelled);
+            }
+
+            canTrigger = true;
             performed = false;
             value = 0;
         }

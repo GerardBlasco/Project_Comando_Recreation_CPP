@@ -10,12 +10,14 @@ Player::Player(Scene* myScene):Actor(myScene)
 	// ESTO SON INPUTS
 	InputSystem::Map("Horizontal")->AddListener(this, &Player::MoveHorizontal);
 	InputSystem::Map("Vertical")->AddListener(this, &Player::MoveVertical);
-	InputSystem::Map("Attack")->AddListener(this, &Player::Shoot, InputEvent::Triggered);
+	//InputSystem::Map("Attack")->AddListener(this, &Player::Shoot, InputEvent::Cancelled);
 }
 
 void Player::Update() 
 {
-	
+	if (InputSystem::Map("Attack")->cancelled) {
+		Shoot();
+	}
 }
 
 void Player::MoveHorizontal()
