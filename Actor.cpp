@@ -25,3 +25,8 @@ void Actor::AddComponent(Component* newComponent)
 {
 	components.push_back(newComponent);
 }
+
+bool Actor::ToDelete()
+{
+	return toDelete;
+}

@@ -51,8 +51,8 @@ void GraphicsInterface::DrawFrame()
 void GraphicsInterface::DrawSprite(std::string imgName, Transform transform, float width, float height)
 {
 	SDL_FRect rect;
-	rect.x = transform.position.x;
-	rect.y = transform.position.y;
+	rect.x = transform.position.x - (width / 2); // Se le resta la mitad de su ancho y alto...
+	rect.y = transform.position.y - (height / 2); // ...para que el "pivote" quede en el centro del sprite
 	rect.w = width;
 	rect.h = height;
 

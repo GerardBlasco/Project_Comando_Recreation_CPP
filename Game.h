@@ -9,13 +9,14 @@ public:
 	static void Play();
 	static void Destroy();
 
+	static float DeltaTime();
 
 private:
 	static Game* instance;
-	static float DeltaTime;
 
 	class GraphicsInterface* GI;
 	bool game_end = false;
+	static float deltaTime;
 
 	Scene* currentScene;
 

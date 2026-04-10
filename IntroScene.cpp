@@ -8,11 +8,14 @@
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
-	GI->LoadImage("UFO.png");
+	GI->LoadImage("player.png");
+	GI->LoadImage("bullet.png");
+	GI->LoadImage("granade.png");
 
 	InputSystem::CreateMap("Horizontal");
 	InputSystem::CreateMap("Vertical");
-	InputSystem::CreateMap("Attack");
+	InputSystem::CreateMap("PrimaryAttack");
+	InputSystem::CreateMap("SecondaryAttack");
 
 	InputSystem::Map("Horizontal")->AddBinding(SDLK_D);
 	InputSystem::Map("Horizontal")->AddBinding(SDLK_A, true);
@@ -20,7 +23,8 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	InputSystem::Map("Vertical")->AddBinding(SDLK_W, true);
 	InputSystem::Map("Vertical")->AddBinding(SDLK_S);
 
-	InputSystem::Map("Attack")->AddBinding(SDL_BUTTON_LEFT);
+	InputSystem::Map("PrimaryAttack")->AddBinding(SDL_BUTTON_LEFT);
+	InputSystem::Map("SecondaryAttack")->AddBinding(SDL_BUTTON_RIGHT);
 
 	Player* player = new Player(this);
 

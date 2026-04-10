@@ -4,10 +4,18 @@
 #include "Vector2.h"
 #include "InputSystem.h"
 
-Sprite::Sprite(Actor* parent, std::string imgName, float sideSize):Component(parent)
+Sprite::Sprite(Actor* parent, std::string imgName, float width):Component(parent)
 {
 	imageName = imgName;
-	this->sideSize = sideSize;
+	this->width = width;
+	this->height = width;
+}
+
+Sprite::Sprite(Actor* parent, std::string imgName, float width, float height) :Component(parent)
+{
+	imageName = imgName;
+	this->width = width;
+	this->height = height;
 }
 
 void Sprite::Update()
@@ -17,5 +25,5 @@ void Sprite::Update()
 
 void Sprite::Render()
 {
-	parent->myScene->GI->DrawSprite(imageName, parent->transform, sideSize, sideSize);
+	parent->myScene->GI->DrawSprite(imageName, parent->transform, width, height);
 }

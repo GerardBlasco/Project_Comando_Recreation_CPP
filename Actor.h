@@ -16,7 +16,10 @@ public:
 
 	void AddComponent(class Component* newComponent);
 
-private:
+	bool ToDelete();
+
+protected:
+	bool toDelete = false;
 	
 };
 

@@ -7,7 +7,7 @@
 #include <Windows.h>
 
 Game* Game::instance = 0;
-float Game::DeltaTime = 0.0f;
+float Game::deltaTime = 0.0f;
 
 void Game::Create()
 {
@@ -19,6 +19,11 @@ void Game::Destroy()
 {
 	if (instance)
 		delete instance;
+}
+
+float Game::DeltaTime()
+{
+	return deltaTime;
 }
 
 void Game::Play()
@@ -60,19 +65,27 @@ void Game::Render()
 void Game::Loop()
 {
 	//bool game_end = false;
-	unsigned int millis = SDL_GetTicks();
-	float desired_deltatime = 1.0f / Parameters::desired_FPS;
+	float desiredDeltaTime = 1.0f / Parameters::desired_FPS;
+	unsigned int lastTicks = SDL_GetTicks();
 	while (!game_end)
 	{
+		unsigned int currentTicks = SDL_GetTicks();
 		//game_end = GI->MustWindowClose();
+		deltaTime = (currentTicks - lastTicks) / 1000.f;
+		lastTicks = currentTicks;
+
 		Update();
 
 		GI->ClearFrame();
 		Render();
 		GI->DrawFrame();
 
-		DeltaTime = (SDL_GetTicks() - millis) / 1000.f;
+		float frameTime = (SDL_GetTicks() - currentTicks) / 1000.f;
 
-		Sleep(int(abs(desired_deltatime - DeltaTime) / 1000));
+		if (frameTime < desiredDeltaTime) {
+			float delay = desiredDeltaTime - frameTime;
+			SDL_Delay(delay * 1000.f);
+		}
+		//Sleep(int(abs(desiredDeltaTime - DeltaTime) / 1000));
 	}
 }

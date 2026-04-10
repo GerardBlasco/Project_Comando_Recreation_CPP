@@ -15,6 +15,16 @@ void Scene::Update()
 		actor->Update();
 	}
 
+	for (int i = 0; i < actors.size(); ) {
+		if (actors[i]->ToDelete()) {
+			delete actors[i];
+			actors.erase(actors.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
+
 	for (Actor* actor : actorsToAdd) {
 		actors.push_back(actor);
 	}

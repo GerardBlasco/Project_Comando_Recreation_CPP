@@ -3,17 +3,21 @@
 class Weapon : public Actor
 {
 private:
-	int weaponDamage;
-	class Vector2 targetPos;
+	virtual void Update();
+	virtual void Move();
+
+protected:
 	float speed;
+	int weaponDamage;
 	int ammo;
 	int maxAmmo;
 	bool infiniteAmmo;
+	class Vector2 targetPos;
+	class Vector2 originPos;
 
-	void Move();
+	Weapon(Scene* myScene, Vector2 originPos, Vector2 targetPos);
 
 public:
-	Weapon(Vector2 targetPos);
 	~Weapon();
 };
 

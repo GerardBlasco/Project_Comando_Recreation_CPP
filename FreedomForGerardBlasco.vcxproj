@@ -131,15 +131,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="FreedomForGerardBlasco.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Granade.cpp" />
     <ClCompile Include="GraphicsInterface.cpp" />
     <ClCompile Include="InputMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Parameters.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RectangleCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -148,8 +152,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Granade.h" />
     <ClInclude Include="GraphicsInterface.h" />
     <ClInclude Include="InputEvent.h" />
     <ClInclude Include="InputMap.h" />
@@ -157,6 +164,7 @@
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RectangleCollider.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Transform.h" />

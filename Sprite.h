@@ -6,10 +6,12 @@ class Sprite : public Component
 {
 protected:
 	std::string imageName;
-	float sideSize;
+	float height;
+	float width;
 
 public:
-	Sprite(Actor* parent, std::string imgName, float sideSize);
+	Sprite(Actor* parent, std::string imgName, float width);
+	Sprite(Actor* parent, std::string imgName, float width, float height);
 	virtual void Update();
 	virtual void Render();
 };
