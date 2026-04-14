@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,6 +141,7 @@
     <ClCompile Include="InputMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntroScene.cpp" />
+    <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="Parameters.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RectangleCollider.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="InputMap.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="IntroScene.h" />
+    <ClInclude Include="MenuScene.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RectangleCollider.h" />

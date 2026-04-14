@@ -5,6 +5,7 @@
 #include "Parameters.h"
 #include "IntroScene.h"
 #include <Windows.h>
+#include "MenuScene.h"
 
 Game* Game::instance = 0;
 float Game::deltaTime = 0.0f;
@@ -35,7 +36,7 @@ void Game::Play()
 Game::Game()
 {
 	GI = new GraphicsInterface();
-	currentScene = new IntroScene(GI);
+	currentScene = new MenuScene(GI);
 
 	InputSystem::CreateMap("CloseGame");
 	InputSystem::Map("CloseGame")->AddBinding(SDLK_ESCAPE);
