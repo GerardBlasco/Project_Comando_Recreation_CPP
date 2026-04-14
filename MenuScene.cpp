@@ -4,7 +4,7 @@
 #include "GraphicsInterface.h"
 #include "InputSystem.h"
 
-MenuScene::MenuScene(GraphicsInterface* GI) : Scene (GI), selectedOption(0)
+MenuScene::MenuScene(GraphicsInterface* GI):  Scene (GI), selectedOption(0)
 {
 	InputSystem::CreateMap("MoveOptionsMenu");
 	InputSystem::CreateMap("EnterToOptionSelected");
@@ -55,13 +55,28 @@ void MenuScene::HandleInput()
 		selectedOption = 0;
 	}
 
-	/*if (InputSystem::Map("EnterToOptionSelected")->ReadFloat()) {
+	/*if (InputSystem::Map("EnterToOptionSelected")->ReadFloat())
+	{
 		switch (selectedOption)
 		{
-		case 0: 
-		
+		case 0:
+			game-> ChangeScene(new IntroScene(GI));
+			break;
+
+		case 1:
+			game->ChangeScene(new HelpScene(GI));
+			break;
+
+		case 2:
+			game->ChangeScene(new CreditsScene(GI));
+			break;
+
+		case 3:
+			game->Quit();
+			break;
 		}
 	}*/
+
 
 
 }

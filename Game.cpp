@@ -63,6 +63,15 @@ void Game::Render()
 	currentScene->Render();
 }
 
+void Game::ChangeScene(Scene* newScene)
+{
+	if (currentScene) {
+		delete currentScene;
+	}
+
+	currentScene = newScene;
+}
+
 void Game::Loop()
 {
 	//bool game_end = false;
