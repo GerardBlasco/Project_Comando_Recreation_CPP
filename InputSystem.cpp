@@ -24,11 +24,20 @@ void InputSystem::DeleteMap(std::string name)
 	delete maps.find(name)->second;
 
 	maps.erase(name);
+
 }
 
 InputMap* InputSystem::Map(const std::string name)
 {
 	return maps.find(name)->second;
+
+	/*auto it = maps.find(name);
+	if (it == maps.end()) {
+		std::cout << "ERROR: InputMap '" << name << "' no existe\n";
+		return nullptr;
+	}
+	return it->second;*/
+
 }
 
 void InputSystem::Update()
@@ -100,6 +109,10 @@ void InputSystem::UpdateInputs()
 void InputSystem::UpdateMaps()
 {
 	for (auto& pair : maps) {
-		pair.second->CheckIfKeyPressed(keyDown);
+		if (pair.second)
+		{
+			//std::cout << pair.first << "\n";
+			pair.second->CheckIfKeyPressed(keyDown);
+		}
 	}
 }

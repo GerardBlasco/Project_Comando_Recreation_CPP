@@ -22,6 +22,15 @@ void Game::Destroy()
 		delete instance;
 }
 
+void Game::ChangeScene(Scene* newScene)
+{
+	if (instance->currentScene) {
+		delete instance->currentScene;
+	}
+
+	instance->currentScene = newScene;
+}
+
 float Game::DeltaTime()
 {
 	return deltaTime;

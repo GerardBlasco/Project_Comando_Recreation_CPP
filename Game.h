@@ -8,6 +8,8 @@ public:
 	static void Create();
 	static void Play();
 	static void Destroy();
+	static void ChangeScene(Scene* newScene);
+
 
 	static float DeltaTime();
 

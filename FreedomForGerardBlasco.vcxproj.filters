@@ -75,6 +75,12 @@
     <ClCompile Include="MenuScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CreditsScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HelpScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -135,6 +141,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HelpScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

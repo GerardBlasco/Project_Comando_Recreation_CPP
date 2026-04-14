@@ -34,11 +34,14 @@ void InputMap::ExecuteListeners(InputEvent type)
     }
 }
 
+
 void InputMap::CheckIfKeyPressed(std::map<int, bool>& keyDown)
 {
     bool keyPressed = false;
 
     cancelled = false;
+
+
 
     for (auto& key : keys)
     {
@@ -59,17 +62,16 @@ void InputMap::CheckIfKeyPressed(std::map<int, bool>& keyDown)
 
             break;
         }
-
-        if (!keyPressed) {
-            if (performed) {
-                cancelled = true;
-                ExecuteListeners(InputEvent::Cancelled);
-            }
-
-            canTrigger = true;
-            performed = false;
-            value = 0;
+    }
+    if (!keyPressed) {
+        if (performed) {
+            cancelled = true;
+            ExecuteListeners(InputEvent::Cancelled);
         }
+
+        canTrigger = true;
+        performed = false;
+        value = 0;
     }
 }
 

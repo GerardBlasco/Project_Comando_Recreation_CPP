@@ -16,6 +16,7 @@ GraphicsInterface::GraphicsInterface()
 	if (!font) {
 		std::cout << "No se ha encontrado la fuente";
 	}
+
 }
 
 GraphicsInterface::~GraphicsInterface()

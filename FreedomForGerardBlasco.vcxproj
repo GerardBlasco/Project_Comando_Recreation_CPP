@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\User\Desktop\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;C:\Users\User\Desktop\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;C:\Users\User\Desktop\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;D:\2nDamvi\PSP + SGS\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\User\Desktop\Juego Proyecto CPP\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;C:\Users\User\Desktop\Juego Proyecto CPP\SDL3_image-devel-3.2.6-VC\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;C:\Users\User\Desktop\Juego Proyecto CPP\SDL3-devel-3.4.0-VC\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -134,10 +134,12 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="FreedomForGerardBlasco.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Granade.cpp" />
     <ClCompile Include="GraphicsInterface.cpp" />
+    <ClCompile Include="HelpScene.cpp" />
     <ClCompile Include="InputMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntroScene.cpp" />
@@ -156,9 +158,11 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Granade.h" />
     <ClInclude Include="GraphicsInterface.h" />
+    <ClInclude Include="HelpScene.h" />
     <ClInclude Include="InputEvent.h" />
     <ClInclude Include="InputMap.h" />
     <ClInclude Include="InputSystem.h" />
