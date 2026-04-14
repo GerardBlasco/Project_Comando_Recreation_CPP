@@ -10,7 +10,6 @@ public:
 	static void Destroy();
 
 	static float DeltaTime();
-	void ChangeScene(Scene* newScene);
 
 private:
 	static Game* instance;
@@ -27,6 +26,5 @@ private:
 	void Loop();
 	void Update();
 	void Render();
-	
 };
 

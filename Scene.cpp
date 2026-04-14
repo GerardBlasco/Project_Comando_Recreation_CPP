@@ -3,7 +3,6 @@
 Scene::Scene(GraphicsInterface* GI)
 {
 	this->GI = GI;
-	
 }
 
 Scene::~Scene()
