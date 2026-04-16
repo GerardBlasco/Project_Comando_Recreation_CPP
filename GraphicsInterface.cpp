@@ -37,6 +37,11 @@ bool GraphicsInterface::MustWindowClose()
 	return false;
 }
 
+SDL_Texture* GraphicsInterface::GetTexture(std::string name)
+{
+	return imageColection[name];
+}
+
 void GraphicsInterface::ClearFrame()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -57,4 +62,35 @@ void GraphicsInterface::DrawSprite(std::string imgName, Transform transform, flo
 	rect.h = height;
 
 	SDL_RenderTexture(renderer, imageColection[imgName], NULL, &rect);
+}
+
+void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Transform transform, float width, float height)
+{
+	SDL_FRect rect;
+	rect.x = transform.position.x - (width / 2); // Se le resta la mitad de su ancho y alto...
+	rect.y = transform.position.y - (height / 2); // ...para que el "pivote" quede en el centro del sprite
+	rect.w = width;
+	rect.h = height;
+
+	SDL_RenderTexture(renderer, imageColection[imgName], &frame.position, &rect);
+}
+
+void GraphicsInterface::DrawLine(float left, float top, float right, float bottom)
+{
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderLine(renderer, left, top, right, bottom);
+}
+
+void GraphicsInterface::DrawRectangle(float left, float top, float width, float height, Color color)
+{
+	SDL_FRect rectangle = { left, top, width, height };
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderRect(renderer, &rectangle);
+}
+
+void GraphicsInterface::DrawRectangle(Vector2 leftTop, float width, float height, Color color)
+{
+	SDL_FRect rectangle = { leftTop.x, leftTop.y, width, height };
+	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+	SDL_RenderRect(renderer, &rectangle);
 }

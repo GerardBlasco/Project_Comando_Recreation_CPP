@@ -7,6 +7,7 @@ private:
 	virtual void Move();
 
 protected:
+	std::string hitTag = "Enemy";
 	float speed;
 	int weaponDamage;
 	int ammo;
@@ -18,6 +19,8 @@ protected:
 	Weapon(Scene* myScene, Vector2 originPos, Vector2 targetPos);
 
 public:
+	void HitTag(std::string hitTag);
+
 	~Weapon();
 };
 

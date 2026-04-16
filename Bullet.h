@@ -10,5 +10,7 @@ public:
 
 	Bullet(Scene* myScene, Vector2 originPos, Vector2 targetPos);
 	virtual void Move();
+
+	virtual void OnCollisionEnter(class Collider* other);
 };
 

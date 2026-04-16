@@ -3,14 +3,19 @@
 #include "Sprite.h"
 #include "Actor.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
+#include "Pickeable.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
 	GI->LoadImage("player.png");
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
+	GI->LoadImage("enemy.png");
+	GI->LoadImage("explosion.png");
+	GI->LoadImage("granade_stack.png");
 
 	InputSystem::CreateMap("Horizontal");
 	InputSystem::CreateMap("Vertical");
@@ -31,6 +36,14 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	//Sprite* sprite = new Sprite(player, "UFO.png", 100);
 
 	actors.push_back(player);
+
+	Enemy* enemy = new Enemy(this, player);
+
+	actors.push_back(enemy);
+
+	Pickeable* pickeable = new Pickeable(this);
+
+	actors.push_back(pickeable);
 
 	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
 	//actors.push_back(sprite);

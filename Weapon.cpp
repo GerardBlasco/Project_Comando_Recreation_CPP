@@ -7,6 +7,13 @@ Weapon::Weapon(Scene* myScene, Vector2 originPos, Vector2 targetPos) :Actor(mySc
 	transform.position = originPos;
 	this->originPos = originPos;
 	this->targetPos = targetPos;
+
+	tag = "Attack";
+}
+
+void Weapon::HitTag(std::string hitTag)
+{
+	this->hitTag = hitTag;
 }
 
 Weapon::~Weapon()

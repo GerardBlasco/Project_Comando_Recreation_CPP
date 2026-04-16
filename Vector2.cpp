@@ -15,6 +15,13 @@ void Vector2::Normalize()
     y /= module;
 }
 
+Vector2 Vector2::Normalized()
+{
+    float module = Module();
+
+    return Vector2(x / module, y / module);
+}
+
 Vector2 Vector2::Bezier(Vector2 originPos, Vector2 middlePos, Vector2 targetPos, float time)
 {
     Vector2 conexion0 = originPos + (middlePos - originPos) * time;

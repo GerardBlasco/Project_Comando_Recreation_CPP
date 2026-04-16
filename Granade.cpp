@@ -1,11 +1,13 @@
 #include "Granade.h"
 #include "Sprite.h"
 #include "Game.h"
+#include "RectangleCollider.h"
+#include "Explosion.h"
 
 Granade::Granade(Scene* myScene, Vector2 originPos, Vector2 targetPos):Weapon(myScene, originPos, targetPos)
 {
 	AddComponent(new Sprite(this, "granade.png", 14));
-
+	
 	transform.position = originPos;
 
 	duration = 1.f;
@@ -25,6 +27,10 @@ void Granade::Move()
 	if (time >= 1.0f) {
 		time = 1.0f;
 		toDelete = true;
+		Weapon* explosion = new Explosion(myScene, transform.position);
+		explosion->Tag(tag);
+		explosion->HitTag(hitTag);
+		myScene->LoadActor(explosion);
 	}
 
 	transform.position = Vector2::Bezier(originPos, middlePos, targetPos, time);

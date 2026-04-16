@@ -27,3 +27,8 @@ void Sprite::Render()
 {
 	parent->myScene->GI->DrawSprite(imageName, parent->transform, width, height);
 }
+
+void Sprite::SetImage(std::string name)
+{
+	imageName = name;
+}

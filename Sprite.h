@@ -14,5 +14,7 @@ public:
 	Sprite(Actor* parent, std::string imgName, float width, float height);
 	virtual void Update();
 	virtual void Render();
+
+	void SetImage(std::string name);
 };
 
