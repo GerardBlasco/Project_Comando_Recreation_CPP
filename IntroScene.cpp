@@ -5,9 +5,13 @@
 #include "Player.h"
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
+#include "HUD.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
+	hud = new HUD(GI);
+
+
 	GI->LoadImage("player.png");
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
@@ -34,4 +38,23 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 
 	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
 	//actors.push_back(sprite);
+}
+
+void IntroScene::Update() 
+{
+	for (Actor* a : actors) {
+		a->Update();
+	}
+
+	hud->Update();
+}
+
+void IntroScene::Render()
+{
+	for (Actor* a : actors) {
+		a->Render();
+	}
+
+	hud->Render();
+
 }

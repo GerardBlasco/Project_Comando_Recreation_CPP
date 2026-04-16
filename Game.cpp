@@ -31,6 +31,11 @@ void Game::ChangeScene(Scene* newScene)
 	instance->currentScene = newScene;
 }
 
+void Game::QuitGame()
+{
+	exit(0);
+}
+
 float Game::DeltaTime()
 {
 	return deltaTime;

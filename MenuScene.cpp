@@ -5,9 +5,11 @@
 #include "InputSystem.h"
 #include "CreditsScene.h"
 #include "HelpScene.h"
+#include "HUD.h"
 
 MenuScene::MenuScene(GraphicsInterface* GI) : Scene (GI), selectedOption(0)
 {
+	//Mapping de las teclas
 	InputSystem::CreateMap("MoveOptionsMenu");
 	InputSystem::CreateMap("EnterToOptionSelected");
 
@@ -23,6 +25,7 @@ MenuScene::MenuScene(GraphicsInterface* GI) : Scene (GI), selectedOption(0)
 
 MenuScene::~MenuScene()
 {
+	//Destruir los mapping
 	InputSystem::DeleteMap("MoveOptionsMenu");
 	InputSystem::DeleteMap("EnterToOptionSelected");
 }
@@ -34,6 +37,7 @@ void MenuScene::Update()
 
 void MenuScene::Render()
 {
+	//Lo que se va a mostrar por pantalla
 	GI->DrawText("Menu principal", 100, 50);
 
 	GI->DrawText((selectedOption == 0 ? "> Jugar" : "Jugar"), 100, 120);
@@ -62,14 +66,12 @@ void MenuScene::HandleInput()
 	if (selectedOption > 3) {
 		selectedOption = 0;
 	}
-	std::cout << "HANDLE ";
 
 }
 
 void MenuScene::ChangeToScene()
 {
-	std::cout << "CHANGE ";
-
+	//Los casos que hay segun el boton que presiones
 		switch (selectedOption)
 		{
 		case 0:
@@ -80,7 +82,9 @@ void MenuScene::ChangeToScene()
 			break;
 		case 2:
 			Game::ChangeScene(new CreditsScene(GI));
-			
+			break;
+		case 3:
+			Game::QuitGame();
 			break;
 		}	
 }
