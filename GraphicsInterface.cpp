@@ -64,11 +64,33 @@ void GraphicsInterface::DrawSprite(std::string imgName, Transform transform, flo
 	SDL_RenderTexture(renderer, imageColection[imgName], NULL, &rect);
 }
 
+void GraphicsInterface::DrawSprite(std::string imgName, Vector2 position, float width, float height)
+{
+	SDL_FRect rect;
+	rect.x = position.x - (width / 2); // Se le resta la mitad de su ancho y alto...
+	rect.y = position.y - (height / 2); // ...para que el "pivote" quede en el centro del sprite
+	rect.w = width;
+	rect.h = height;
+
+	SDL_RenderTexture(renderer, imageColection[imgName], NULL, &rect);
+}
+
 void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Transform transform, float width, float height)
 {
 	SDL_FRect rect;
 	rect.x = transform.position.x - (width / 2); // Se le resta la mitad de su ancho y alto...
 	rect.y = transform.position.y - (height / 2); // ...para que el "pivote" quede en el centro del sprite
+	rect.w = width;
+	rect.h = height;
+
+	SDL_RenderTexture(renderer, imageColection[imgName], &frame.position, &rect);
+}
+
+void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Vector2 position, float width, float height)
+{
+	SDL_FRect rect;
+	rect.x = position.x - (width / 2); // Se le resta la mitad de su ancho y alto...
+	rect.y = position.y - (height / 2); // ...para que el "pivote" quede en el centro del sprite
 	rect.w = width;
 	rect.h = height;
 

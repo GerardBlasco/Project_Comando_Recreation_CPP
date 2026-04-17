@@ -134,6 +134,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="InputMap.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntroScene.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Parameters.cpp" />
     <ClCompile Include="Pickeable.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
@@ -174,6 +177,7 @@
     <ClInclude Include="InputMap.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="IntroScene.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="Pickeable.h" />
     <ClInclude Include="Player.h" />

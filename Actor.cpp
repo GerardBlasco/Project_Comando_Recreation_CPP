@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Component.h"
 #include "Collider.h"
+#include "Parameters.h"
 
 Actor::Actor(Scene* myScene)
 {
@@ -23,6 +24,15 @@ void Actor::Update()
 
 void Actor::Render()
 {
+	if (myScene->mainCamera) {
+
+		Vector2 screenCenter = Vector2(Parameters::width * 0.5f, Parameters::height * 0.5f);
+		screenPosition = transform.position - myScene->mainCamera->transform.position + screenCenter;
+	}
+	else {
+		screenPosition = transform.position;
+	}
+
 	for (Component* component : components) {
 		component->Render();
 	}

@@ -49,7 +49,7 @@ void Animation::Render()
 		return;
 	}
 
-	parent->myScene->GI->DrawSprite(sheetName, frames[currentFrame], parent->transform, width, height);
+	parent->myScene->GI->DrawSprite(sheetName, frames[currentFrame], parent->screenPosition, width, height);
 
 	timer += Game::DeltaTime();
 

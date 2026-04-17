@@ -15,6 +15,8 @@ public:
 	virtual void Update();
 	void InternalUpdate();
 	virtual void Render();
+
+	Vector2 screenPosition;
 	std::string tag = "Untagged";
 
 	std::vector<class Component*> components;

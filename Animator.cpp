@@ -9,6 +9,14 @@ Animator::Animator(Actor* parent):Component(parent)
 
 }
 
+Animator::~Animator()
+{
+	for (auto& pair : animations) {
+		delete pair.second;
+	}
+	animations.clear();
+}
+
 void Animator::LoadAnimation(std::string name, Animation* animation)
 {
 	animation->Stop();

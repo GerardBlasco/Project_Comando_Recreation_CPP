@@ -2,6 +2,7 @@
 #include <vector>
 #include "GraphicsInterface.h"
 #include "InputSystem.h"
+#include "Camera.h"
 
 class Scene
 {
@@ -12,6 +13,7 @@ protected:
 
 public:
 	GraphicsInterface* GI;
+	Camera* mainCamera;
 
 	Scene(GraphicsInterface* GI);
 	~Scene();
@@ -21,6 +23,8 @@ public:
 	void LoadActor(class Actor* actor);
 	void LoadCollider(class RectangleCollider* collider);
 	void RemoveCollider(class RectangleCollider* collider);
+
+	std::vector<class Actor*> GetAllActors();
 
 	void CheckCollisions();
 };

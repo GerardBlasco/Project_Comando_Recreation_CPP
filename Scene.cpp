@@ -63,6 +63,11 @@ void Scene::RemoveCollider(RectangleCollider* collider)
 	}
 }
 
+std::vector<Actor*> Scene::GetAllActors()
+{
+	return actors;
+}
+
 void Scene::CheckCollisions()
 {
 	for (int i = 0; i < existingColliders.size(); i++) {

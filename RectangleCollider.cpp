@@ -27,7 +27,8 @@ void RectangleCollider::Update()
 
 void RectangleCollider::Render()
 {
-	parent->myScene->GI->DrawRectangle(leftTop.x, leftTop.y, width, height, color);
+	Vector2 screenPos = leftTop - parent->myScene->mainCamera->transform.position + Camera::GetScreenCenter();
+	parent->myScene->GI->DrawRectangle(screenPos.x, screenPos.y, width, height, color);
 }
 
 bool RectangleCollider::CheckIfCollided(RectangleCollider* other)

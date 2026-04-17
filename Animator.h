@@ -16,6 +16,7 @@ private:
 
 public:
 	Animator(Actor* parent);
+	~Animator();
 
 	void LoadAnimation(std::string name, class Animation* animation);
 	void PlayAnimation(std::string name);

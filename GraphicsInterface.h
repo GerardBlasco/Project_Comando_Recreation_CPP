@@ -24,7 +24,9 @@ public:
 	void ClearFrame();
 	void DrawFrame();
 	void DrawSprite(std::string imgName, Transform transform, float width, float height);
+	void DrawSprite(std::string imgName, Vector2 position, float width, float height);
 	void DrawSprite(std::string imgName, Frame frame, Transform transform, float width, float height);
+	void DrawSprite(std::string imgName, Frame frame, Vector2 position, float width, float height);
 	void DrawLine(float left, float top, float right, float bottom);
 	void DrawRectangle(float left, float top, float width, float height, Color color);
 	void DrawRectangle(Vector2 leftTop, float width, float height, Color color);
