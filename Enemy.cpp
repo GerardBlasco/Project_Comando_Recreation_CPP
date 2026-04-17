@@ -1,5 +1,5 @@
 #include "Enemy.h"
-#include "Sprite.h"
+#include "Animator.h"
 #include "RectangleCollider.h"
 #include "Game.h"
 #include "Player.h"
@@ -13,18 +13,54 @@ Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 	transform.position = Vector2(400, 200);
 	tag = "Enemy";
 
-	AddComponent(new Sprite(this, "enemy.png", 30, 50));
-	AddComponent(new RectangleCollider(this, 30, 50, Color(0, 255, 255, 255)));
+	AddComponent(new RectangleCollider(this, 40, 40, Color(0, 255, 255, 255)));
+
+	animator = new Animator(this);
+	AddComponent(animator);
+
+	std::map<int, std::string> directions =
+	{
+		{0, "Right"},
+		{1, "DownRight"},
+		{2, "Down"},
+		{3, "DownLeft"},
+		{4, "Left"},
+		{5, "UpLeft"},
+		{6, "Up"},
+		{7, "UpRight"}
+	};
+
+	std::vector<std::string> sheetOrder =
+	{
+		"Down",
+		"Up",
+		"Left",
+		"Right",
+		"DownLeft",
+		"DownRight",
+		"UpLeft",
+		"UpRight"
+	};
+
+	animator->GenerateAnimationsRange("enemy.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
+	animator->GenerateAnimationsRange("enemy.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
+	animator->LoadDirectionsOrder(directions);
 }
 
 void Enemy::Update()
 {
 	time += Game::DeltaTime();
 
-	float playerDistance = (target->transform.position - transform.position).Module();
+	Vector2 playerDirection = target->transform.position - transform.position;
+	float playerDistance = playerDirection.Module();
+
+	std::string animationName;
 
 	switch (state) {
 	case EnemyState::Thinking:
+
+		animator->SetCurrentIndex(Vector2::DirectionIndex(playerDirection, 8));
+		animationName = "Idle" + animator->GetDirection(animator->GetCurrentIndex());
 
 		if (playerDistance <= shootDistance) {
 			state = EnemyState::Shooting;
@@ -43,6 +79,9 @@ void Enemy::Update()
 		
 	case EnemyState::Moving:
 
+		animator->SetCurrentIndex(Vector2::DirectionIndex(direction, 8));
+		animationName = "Walk" + animator->GetDirection(animator->GetCurrentIndex());
+
 		transform.position += direction * 200.f * Game::DeltaTime();
 
 		if (time >= duration) {
@@ -54,6 +93,9 @@ void Enemy::Update()
 		break;
 		
 	case EnemyState::Shooting:
+
+		animator->SetCurrentIndex(Vector2::DirectionIndex(playerDirection, 8));
+		animationName = "Idle" + animator->GetDirection(animator->GetCurrentIndex());
 
 		cooldown -= Game::DeltaTime();
 
@@ -74,6 +116,11 @@ void Enemy::Update()
 		}
 
 		break;
+	}
+
+	if (animator->GetCurrentAnimationName() != animationName) {
+		animator->SetCurrentAnimationName(animationName);
+		animator->PlayAnimation(animationName);
 	}
 }
 

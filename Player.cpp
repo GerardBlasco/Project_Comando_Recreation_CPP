@@ -92,16 +92,38 @@ Player::Player(Scene* myScene):Actor(myScene)
 	animator = new Animator(this);
 	AddComponent(animator);
 
-	animator->GenerateAnimationsRange("player.png", "Walk", order, 0, 0, 6, 8, 4, 40.f, 40.f);
-	animator->GenerateAnimationsRange("player.png", "Idle", order, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
+	std::map<int, std::string> directions = 
+	{ 
+		{0, "Right"}, 
+		{1, "DownRight"}, 
+		{2, "Down"}, 
+		{3, "DownLeft"}, 
+		{4, "Left"}, 
+		{5, "UpLeft"}, 
+		{6, "Up"}, 
+		{7, "UpRight"} 
+	};
 
-	//animator->PlayAnimation("WalkUp");
+	std::vector<std::string> sheetOrder = 
+	{ 
+		"Down", 
+		"Up", 
+		"Left", 
+		"Right", 
+		"DownLeft", 
+		"DownRight", 
+		"UpLeft", 
+		"UpRight" 
+	};
+
+	animator->GenerateAnimationsRange("player.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
+	animator->GenerateAnimationsRange("player.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
+	animator->LoadDirectionsOrder(directions);
 
 	tag = "Player";
 
 	transform.position.x = 60;
 	transform.position.y = 60;
-
 
 	// ESTO SON INPUTS
 	InputSystem::Map("Horizontal")->AddListener(this, &Player::MoveHorizontal);
@@ -118,60 +140,21 @@ void Player::Update()
 
 	Vector2 mouseDirection = mousePosition - transform.position;
 
-	currentIndex = DirectionIndex(mouseDirection);
+	animator->SetCurrentIndex(Vector2::DirectionIndex(mouseDirection, 8));
 
 	std::string animationName;
 
 	if (isMoving) {
-		animationName = "Walk" + directions[currentIndex];
+		animationName = "Walk" + animator->GetDirection(animator->GetCurrentIndex());
 	}
 	else {
-		animationName = "Idle" + directions[currentIndex];
+		animationName = "Idle" + animator->GetDirection(animator->GetCurrentIndex());
 	}
 
-	//animationName = "Walk" + directions[currentIndex];
-
-	if (currentAnimation != animationName) {
-		currentAnimation = animationName;
-		animator->PlayAnimation(currentAnimation);
+	if (animator->GetCurrentAnimationName() != animationName) {
+		animator->SetCurrentAnimationName(animationName);
+		animator->PlayAnimation(animationName);
 	}
-
-	/*if (index != currentIndex)
-	{
-		currentIndex = index;
-
-		switch (currentIndex) {
-		case 0:
-			animator->PlayAnimation("Walk Right");
-			break;
-		case 1:
-			animator->PlayAnimation("Walk Down Right");
-			break;
-		case 2:
-			if (isMoving) {
-				animator->PlayAnimation("Walk Down");
-			}
-			else {
-				animator->PlayAnimation("Idle Down");
-			}
-			break;
-		case 3:
-			animator->PlayAnimation("Walk Down Left");
-			break;
-		case 4:
-			animator->PlayAnimation("Walk Left");
-			break;
-		case 5:
-			animator->PlayAnimation("Walk Up Left");
-			break;
-		case 6:
-			animator->PlayAnimation("Walk Up");
-			break;
-		case 7:
-			animator->PlayAnimation("Walk Up Right");
-			break;
-		}
-	}*/
 }
 
 void Player::MoveHorizontal()
@@ -188,24 +171,10 @@ void Player::Shoot()
 {
 	Weapon* bullet = new Bullet(myScene, transform.position, Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()));
 	myScene->LoadActor(bullet);
-	//std::cout << "Player Shot Primary!" << std::endl;
 }
 
 void Player::ShootAlternative()
 {
 	Weapon* granade = new Granade(myScene, transform.position, Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()));
 	myScene->LoadActor(granade);
-	//std::cout << "Player Shot Secondary!" << std::endl;
-}
-
-int Player::DirectionIndex(Vector2 direction)
-{
-	float angle = atan2(direction.y, direction.x);
-	float degrees = angle * (180.0f / 3.14159265f);
-
-	if (degrees < 0) degrees += 360.0f;
-
-	int index = (int)((degrees + 22.5f) / 45.0f) % 8;
-
-	return index;
 }

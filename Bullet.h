@@ -3,7 +3,7 @@
 class Bullet : public Weapon
 {
 protected:
-	float maxDistance = 400.f;
+	float maxDistance = 350.f;
 
 public:
 	Vector2 direction;

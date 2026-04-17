@@ -1,5 +1,5 @@
 #include "Explosion.h"
-#include "Sprite.h"
+#include "Animation.h"
 #include "RectangleCollider.h"
 #include "Game.h"
 
@@ -7,8 +7,10 @@ Explosion::Explosion(Scene* myScene, Vector2 position):Weapon(myScene, position,
 {
 	tag = "Attack";
 	transform.position = position;
-	AddComponent(new Sprite(this, "explosion.png", 40));
-	AddComponent(new RectangleCollider(this, 40, 40, Color(255, 255, 0, 255)));
+	/*Animation* animation = new Animation(this, "explosion.png", 3, 1, 40, 40, 0.05f);
+	animation->LoadFrames(0, 0, 3);
+	animation->PlayOnce();
+	AddComponent(animation);*/
 }
 
 void Explosion::Update()

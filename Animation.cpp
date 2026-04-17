@@ -56,8 +56,11 @@ void Animation::Render()
 	if (timer >= frameRate) {
 		currentFrame++;
 
-		if (currentFrame >= maxFrames) {
+		if (currentFrame >= maxFrames && loop) {
 			currentFrame = 0;
+		}
+		else if (currentFrame >= maxFrames && !loop) {
+			Stop();
 		}
 
 		timer = 0;
@@ -72,6 +75,11 @@ void Animation::Play()
 void Animation::Stop()
 {
 	playing = false;
+}
+
+void Animation::PlayOnce()
+{
+	loop = false;
 }
 
 void Animation::SetFrameRate(float frameRate)

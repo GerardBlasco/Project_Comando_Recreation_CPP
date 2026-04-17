@@ -19,6 +19,7 @@ private:
 	float frameRate = 0.1f;
 
 	bool playing = true;
+	bool loop = true;
 
 public:
 	Animation(Actor* parent, std::string sheetName, int columns, int rows, float width, float height);
@@ -29,6 +30,7 @@ public:
 	void Play();
 	void Stop();
 
+	void PlayOnce();
 	void SetFrameRate(float frameRate);
 };
 

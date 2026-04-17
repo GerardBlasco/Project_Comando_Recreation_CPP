@@ -16,6 +16,8 @@ private:
 	class Player* target;
 	EnemyState state = EnemyState::Thinking;
 
+	class Animator* animator;
+
 	float time = 0.0f;
 	float duration = 1.5f;
 	float minDuration = 1.f;

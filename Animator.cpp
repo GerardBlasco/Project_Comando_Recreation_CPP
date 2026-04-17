@@ -12,7 +12,7 @@ Animator::Animator(Actor* parent):Component(parent)
 void Animator::LoadAnimation(std::string name, Animation* animation)
 {
 	animation->Stop();
-	std::cout << "Created animation: " << name << std::endl;
+	//std::cout << "Created animation: " << name << std::endl;
 	animations[name] = animation;
 }
 
@@ -26,9 +26,42 @@ void Animator::PlayAnimation(std::string name)
 	currentAnimation->Play();
 }
 
+void Animator::SetCurrentIndex(int index)
+{
+	currentIndex = index;
+}
+
+int Animator::GetCurrentIndex()
+{
+	return currentIndex;
+}
+
 void Animator::Render()
 {
 	currentAnimation->Render();
+}
+
+void Animator::LoadDirectionsOrder(std::map<int, std::string> orderedDirections)
+{
+	for (auto& pair : orderedDirections) {
+		std::cout << "Key: " << pair.first << " | Name: " << pair.second << std::endl;
+		directions[pair.first] = pair.second;
+	}
+}
+
+std::string Animator::GetDirection(int id)
+{
+	return directions[id];
+}
+
+std::string Animator::GetCurrentAnimationName()
+{
+	return currentAnimationName;
+}
+
+void Animator::SetCurrentAnimationName(std::string name)
+{
+	currentAnimationName = name;
 }
 
 Animation* Animator::CreateAnimation(std::string sheetName, int x, int y, int columns, int rows, int numFrames, float width, float height, float frameRate)

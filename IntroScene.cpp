@@ -14,6 +14,7 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
 	GI->LoadImage("enemy.png");
+	GI->LoadImage("bullet_explosion.png");
 	GI->LoadImage("explosion.png");
 	GI->LoadImage("granade_stack.png");
 

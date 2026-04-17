@@ -31,3 +31,19 @@ Vector2 Vector2::Bezier(Vector2 originPos, Vector2 middlePos, Vector2 targetPos,
 
     return curve;
 }
+
+int Vector2::DirectionIndex(Vector2 direction, int numDirections)
+{
+    float completeDegrees = 360.f;
+
+    float angle = atan2(direction.y, direction.x);
+    float degrees = angle * (180.0f / 3.14159265f);
+
+    if (degrees < 0) degrees += completeDegrees;
+
+    float separatedDegrees = completeDegrees / numDirections;
+
+    int index = (int)((degrees + 22.5f) / separatedDegrees) % numDirections;
+
+    return index;
+}
