@@ -26,3 +26,8 @@ bool Collider::CheckIfCollided(Collider* other)
 {
 	return false;
 }
+
+void Collider::AddOffset(Vector2 offset)
+{
+	this->offset = offset;
+}

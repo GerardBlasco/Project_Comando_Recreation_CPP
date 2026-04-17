@@ -29,6 +29,7 @@ public:
 	void Tag(std::string tag);
 
 	virtual void OnCollisionEnter(class Collider* other);
+	virtual void OnCollisionStay(class Collider* other);
 
 protected:
 	bool toDelete = false;

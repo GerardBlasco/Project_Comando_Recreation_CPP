@@ -2,7 +2,7 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Actor.h"
-#include "Map.h"
+#include "Background.h"
 #include "Player.h"
 #include "Camera.h"
 #include "Enemy.h"
@@ -35,8 +35,8 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	InputSystem::Map("PrimaryAttack")->AddBinding(SDL_BUTTON_LEFT);
 	InputSystem::Map("SecondaryAttack")->AddBinding(SDL_BUTTON_RIGHT);
 
-	Map* map = new Map(this);
-	map->AddComponent(new Sprite(map, "first_zone_map.png", 1000, 10000));
+	Background* map = new Background(this, "first_zone_map.png", 640, 3120);
+	map->AlignToBottom();
 	actors.push_back(map);
 
 	Player* player = new Player(this);

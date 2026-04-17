@@ -70,6 +70,12 @@ std::vector<Actor*> Scene::GetAllActors()
 
 void Scene::CheckCollisions()
 {
+	for (RectangleCollider* collider : existingColliders) {
+		if (collider) {
+			collider->SetPreviousCollisions();
+		}
+	}
+
 	for (int i = 0; i < existingColliders.size(); i++) {
 		RectangleCollider* a = existingColliders[i];
 		if (!a) continue;
@@ -79,9 +85,14 @@ void Scene::CheckCollisions()
 			if (!b) continue;
 
 			if (a->CheckIfCollided(b)) {
-				//std::cout << "Collided!" << std::endl;
-				a->Parent()->OnCollisionEnter(b);
-				b->Parent()->OnCollisionEnter(a);
+				
+				a->currentCollisions.push_back(b);
+				b->currentCollisions.push_back(a);
+
+				if (!a->AlreadyColliding(b)) {
+					a->Parent()->OnCollisionEnter(b);
+					b->Parent()->OnCollisionEnter(a);
+				}
 			}
 		}
 	}

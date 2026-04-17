@@ -22,7 +22,7 @@ RectangleCollider::~RectangleCollider()
 
 void RectangleCollider::Update()
 {
-	leftTop = Vector2(parent->transform.position.x - (width / 2), parent->transform.position.y - (height / 2));
+	leftTop = Vector2(parent->transform.position.x + offset.x - (width / 2), parent->transform.position.y + offset.y - (height / 2));
 }
 
 void RectangleCollider::Render()
@@ -40,4 +40,15 @@ bool RectangleCollider::CheckIfCollided(RectangleCollider* other)
 	}
 
 	return collided;
+}
+
+void RectangleCollider::SetPreviousCollisions()
+{
+	previousCollisions = currentCollisions;
+	currentCollisions.clear();
+}
+
+bool RectangleCollider::AlreadyColliding(RectangleCollider* other)
+{
+	return std::find(previousCollisions.begin(), previousCollisions.end(), other) != previousCollisions.end();
 }

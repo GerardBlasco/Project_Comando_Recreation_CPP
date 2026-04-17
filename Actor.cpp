@@ -62,6 +62,10 @@ void Actor::OnCollisionEnter(Collider* other)
 {
 }
 
+void Actor::OnCollisionStay(Collider* other)
+{
+}
+
 void Actor::InternalUpdate()
 {
 	for (Component* component : components) {

@@ -1,9 +1,13 @@
 #pragma once
 #include "Collider.h"
+#include <vector>
 
 class RectangleCollider : public Collider
 {
 public:
+	std::vector<RectangleCollider*> currentCollisions;
+	std::vector<RectangleCollider*> previousCollisions;
+
 	Vector2 leftTop;
 
 	RectangleCollider(Actor* parent, float width, float height);
@@ -14,6 +18,9 @@ public:
 	virtual void Render();
 
 	virtual bool CheckIfCollided(RectangleCollider* other);
+
+	void SetPreviousCollisions();
+	bool AlreadyColliding(RectangleCollider* other);
 
 private:
 	inline float Left() { return leftTop.x; }

@@ -44,9 +44,6 @@ void Camera::Update()
 	if (verticalMovement) {
 		transform.position.y = followTarget->transform.position.y;
 	}
-	else {
-		transform.position.y = 0;
-	}
 }
 
 Vector2 Camera::ScreenToWorld(Vector2 screenPos, Camera* camera)
