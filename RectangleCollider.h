@@ -4,14 +4,21 @@
 class RectangleCollider : public Collider
 {
 public:
-	class Vector2 topLeft;
+	Vector2 leftTop;
 
-	RectangleCollider(Actor* parent, class Vector2 center, class Vector2 topLeft);
+	RectangleCollider(Actor* parent, float width, float height);
+	RectangleCollider(Actor* parent, float width, float height, Color color);
+	~RectangleCollider();
+
+	virtual void Update();
+	virtual void Render();
+
+	virtual bool CheckIfCollided(RectangleCollider* other);
 
 private:
-	float Left();
-	float Right();
-	float Top();
-	float Bottom();
+	inline float Left() { return leftTop.x; }
+	inline float Right() { return leftTop.x + width; }
+	inline float Top() { return leftTop.y; }
+	inline float Bottom() { return leftTop.y + height; }
 };
 

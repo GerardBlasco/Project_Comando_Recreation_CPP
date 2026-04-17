@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include <vector>
+#include <map>
 class Player : public Actor
 {
 public:
@@ -8,7 +9,7 @@ public:
 	std::vector<class Weapon*> weapons;
 
 	Player(class Scene* myScene);
-	~Player();
+	//~Player();
 
 	void LoseHealth(const int quantity);
 	void PickUp();
@@ -16,7 +17,11 @@ public:
 private:
 	int score;
 
-	void Update();
+	class Animator* animator;
+
+	std::string currentAnimation;
+
+	virtual void Update();
 
 	void MoveHorizontal();
 	void MoveVertical();

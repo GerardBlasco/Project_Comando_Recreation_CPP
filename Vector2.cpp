@@ -15,6 +15,13 @@ void Vector2::Normalize()
     y /= module;
 }
 
+Vector2 Vector2::Normalized()
+{
+    float module = Module();
+
+    return Vector2(x / module, y / module);
+}
+
 Vector2 Vector2::Bezier(Vector2 originPos, Vector2 middlePos, Vector2 targetPos, float time)
 {
     Vector2 conexion0 = originPos + (middlePos - originPos) * time;
@@ -23,4 +30,20 @@ Vector2 Vector2::Bezier(Vector2 originPos, Vector2 middlePos, Vector2 targetPos,
     Vector2 curve = conexion0 + (conexion1 - conexion0) * time;
 
     return curve;
+}
+
+int Vector2::DirectionIndex(Vector2 direction, int numDirections)
+{
+    float completeDegrees = 360.f;
+
+    float angle = atan2(direction.y, direction.x);
+    float degrees = angle * (180.0f / 3.14159265f);
+
+    if (degrees < 0) degrees += completeDegrees;
+
+    float separatedDegrees = completeDegrees / numDirections;
+
+    int index = (int)((degrees + 22.5f) / separatedDegrees) % numDirections;
+
+    return index;
 }

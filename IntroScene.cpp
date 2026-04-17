@@ -2,10 +2,14 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Actor.h"
+#include "Map.h"
 #include "Player.h"
+#include "Camera.h"
+#include "Enemy.h"
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
-#include "HUD.h"
+#include "Pickeable.h"
+
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -15,6 +19,10 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	GI->LoadImage("player.png");
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
+	GI->LoadImage("enemy.png");
+	GI->LoadImage("bullet_explosion.png");
+	GI->LoadImage("explosion.png");
+	GI->LoadImage("granade_stack.png");
 
 	InputSystem::CreateMap("Horizontal");
 	InputSystem::CreateMap("Vertical");
@@ -30,11 +38,23 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	InputSystem::Map("PrimaryAttack")->AddBinding(SDL_BUTTON_LEFT);
 	InputSystem::Map("SecondaryAttack")->AddBinding(SDL_BUTTON_RIGHT);
 
+	Map* map = new Map(this);
+	map->AddComponent(new Sprite(map, "first_zone_map.png", 1000, 10000));
+	actors.push_back(map);
+
 	Player* player = new Player(this);
-
-	//Sprite* sprite = new Sprite(player, "UFO.png", 100);
-
 	actors.push_back(player);
+
+	mainCamera = new Camera(this, player);
+	actors.push_back(mainCamera);
+
+	Enemy* enemy = new Enemy(this, player);
+
+	actors.push_back(enemy);
+
+	Pickeable* pickeable = new Pickeable(this);
+
+	actors.push_back(pickeable);
 
 	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
 	//actors.push_back(sprite);

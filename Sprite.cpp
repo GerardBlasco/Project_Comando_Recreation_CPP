@@ -25,5 +25,10 @@ void Sprite::Update()
 
 void Sprite::Render()
 {
-	parent->myScene->GI->DrawSprite(imageName, parent->transform, width, height);
+	parent->myScene->GI->DrawSprite(imageName, parent->screenPosition, width, height);
+}
+
+void Sprite::SetImage(std::string name)
+{
+	imageName = name;
 }
