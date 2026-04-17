@@ -43,6 +43,7 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	actors.push_back(player);
 
 	mainCamera = new Camera(this, player);
+	mainCamera->HorizontalMovement(false);
 	actors.push_back(mainCamera);
 
 	Enemy* enemy = new Enemy(this, player);

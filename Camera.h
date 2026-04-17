@@ -7,6 +7,8 @@ public:
 	Camera(Scene* myScene, Actor* target);
 
 	void SetFollowTarget(Actor* target);
+	void VerticalMovement(bool verticalMovement);
+	void HorizontalMovement(bool horizontalMovement);
 
 	virtual void Update();
 
@@ -15,5 +17,7 @@ public:
 
 private:
 	Actor* followTarget;
+	bool verticalMovement = true;
+	bool horizontalMovement = true;
 };
 
