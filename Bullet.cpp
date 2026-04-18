@@ -48,5 +48,15 @@ void Bullet::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == hitTag) {
 		toDelete = true;
+		Weapon* explosion = new Explosion(myScene, transform.position);
+		explosion->Tag(tag);
+		explosion->HitTag(hitTag);
+
+		Animation* animation = new Animation(explosion, "bullet_explosion.png", 3, 1, 40, 40, 0.05f);
+		animation->LoadFrames(0, 0, 3);
+		animation->PlayOnce();
+
+		explosion->AddComponent(animation);
+		myScene->LoadActor(explosion);
 	}
 }

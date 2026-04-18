@@ -11,6 +11,11 @@ InputMap::InputMap(SDL_Keycode key, bool inverted)
     AddBinding(key, inverted);
 }
 
+InputMap::~InputMap()
+{
+    listeners.clear();
+}
+
 void InputMap::AddBinding(SDL_Keycode key, bool inverted)
 {
     float value = 1.f;

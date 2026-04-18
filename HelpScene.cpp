@@ -7,7 +7,7 @@
 HelpScene::HelpScene(GraphicsInterface* GI):Scene(GI)
 {
 	InputSystem::CreateMap("GoBack");
-	InputSystem::Map("GoBack")->AddBinding(SDLK_R);
+	InputSystem::Map("GoBack")->AddBinding(SDLK_RETURN);
 	InputSystem::Map("GoBack")->AddListener(this, &HelpScene::HandleInput, InputEvent::Triggered);
 
 	actors.push_back(new Text(this, "Bienvenido al menu de ayuda, te muestro los bindings que se usan en este juego: ", Vector2(100, 120)));
@@ -19,7 +19,7 @@ HelpScene::HelpScene(GraphicsInterface* GI):Scene(GI)
 
 HelpScene::~HelpScene()
 {
-	//InputSystem::DeleteMap("GoBack");
+	InputSystem::DeleteMap("GoBack");
 }
 
 void HelpScene::HandleInput()

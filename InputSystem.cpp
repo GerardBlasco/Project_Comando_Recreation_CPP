@@ -4,6 +4,7 @@
 
 std::map<int, bool> InputSystem::keyDown;
 std::map<std::string, InputMap*> InputSystem::maps;
+std::vector<std::string> InputSystem::mapsToDelete;
 
 bool InputSystem::eventQuit = false;
 float InputSystem::deltaX = 0;
@@ -21,9 +22,12 @@ void InputSystem::CreateMap(std::string name, SDL_Keycode key, bool inverted)
 
 void InputSystem::DeleteMap(std::string name)
 {
-	delete maps.find(name)->second;
+	mapsToDelete.push_back(name);
+}
 
-	maps.erase(name);
+void InputSystem::ResetInputs()
+{
+	keyDown.clear();
 }
 
 InputMap* InputSystem::Map(const std::string name)
@@ -99,6 +103,15 @@ void InputSystem::UpdateInputs()
 
 void InputSystem::UpdateMaps()
 {
+	for (std::string name : mapsToDelete) {
+		std::map<std::string, InputMap*>::iterator it = maps.find(name);
+		if (it != maps.end()) {
+			delete it->second;
+			maps.erase(it);
+		}
+	}
+	mapsToDelete.clear();
+
 	for (auto& pair : maps) {
 		if (pair.second) {
 			pair.second->CheckIfKeyPressed(keyDown);

@@ -29,6 +29,8 @@ void Game::ChangeScene(Scene* newScene)
 	}
 
 	instance->currentScene = newScene;
+
+	InputSystem::ResetInputs();
 }
 
 float Game::DeltaTime()
