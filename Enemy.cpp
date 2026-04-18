@@ -8,6 +8,7 @@
 
 Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 {
+	this->player = target; //se guarda el player
 	this->target = target;
 
 	transform.position = Vector2(400, 200);
@@ -127,7 +128,11 @@ void Enemy::Update()
 void Enemy::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
-		toDelete = true;
+
+		player->AddScore(100); //sumamos al player una puntuacionn de 100 por cada enemigo matado
+
+		toDelete = true; //lo eliminamos
+		
 	}
 }
 

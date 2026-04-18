@@ -1,6 +1,7 @@
 #pragma once
 #include "Actor.h"
 #include "EnemyState.h"
+#include "Player.h"
 
 class Enemy : public Actor
 {
@@ -10,6 +11,8 @@ public:
 	virtual void Update();
 
 	virtual void OnCollisionEnter(class Collider* other);
+
+	Player* player; //puntero al player
 
 private:
 	Vector2 direction;

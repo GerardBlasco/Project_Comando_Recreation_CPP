@@ -6,6 +6,7 @@ class Player : public Actor
 {
 public:
 	int health;
+
 	std::vector<class Weapon*> weapons;
 
 	Player(class Scene* myScene);
@@ -13,9 +14,11 @@ public:
 
 	void LoseHealth(const int quantity);
 	void PickUp();
+	void AddScore(int amount); //Metodo para añadir puntuacion
+	int GetScore(); //Metodo que devuelve la puntuacion
 
 private:
-	int score;
+	int score; //Puntuacion del player
 
 	class Animator* animator;
 

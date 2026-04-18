@@ -58,6 +58,17 @@ Player::Player(Scene* myScene):Actor(myScene)
 	InputSystem::Map("SecondaryAttack")->AddListener(this, &Player::ShootAlternative, InputEvent::Triggered);
 }
 
+//METODOS PARA PUNTUACION
+void Player::AddScore(int amount)
+{
+	score += amount;
+}
+
+int Player::GetScore()
+{
+	return score;
+}
+
 void Player::Update() 
 {
 	bool isMoving = InputSystem::Map("Horizontal")->performed || InputSystem::Map("Vertical")->performed;
