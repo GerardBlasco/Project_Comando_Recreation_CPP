@@ -25,3 +25,13 @@ Actor* Component::Parent()
 {
 	return parent;
 }
+
+void Component::ToDelete(bool b)
+{
+	toDelete = b;
+}
+
+bool Component::ToDelete()
+{
+	return toDelete;
+}

@@ -14,6 +14,7 @@ public:
 
 	InputMap();
 	InputMap(SDL_Keycode key, bool inverted = false);
+	~InputMap();
 	void AddBinding(SDL_Keycode key, bool inverted = false);
 	void RemoveBinding(SDL_Keycode key);
 

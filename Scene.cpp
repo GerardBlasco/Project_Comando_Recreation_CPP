@@ -34,6 +34,15 @@ void Scene::Update()
 	actorsToAdd.clear();
 
 	CheckCollisions();
+
+	for (int i = 0; i < existingColliders.size(); ) {
+		if (existingColliders[i]->ToDelete()) {
+			existingColliders.erase(existingColliders.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
 }
 
 void Scene::Render()
@@ -71,6 +80,12 @@ void Scene::ChangeToScene()
 {
 }
 
+bool Scene::ColliderStillExists(RectangleCollider* collider)
+{
+	if (!collider || collider->ToDelete()) return false;
+	return std::find(existingColliders.begin(), existingColliders.end(), collider) != existingColliders.end();
+}
+
 std::vector<Actor*> Scene::GetAllActors()
 {
 	return actors;
@@ -79,18 +94,18 @@ std::vector<Actor*> Scene::GetAllActors()
 void Scene::CheckCollisions()
 {
 	for (RectangleCollider* collider : existingColliders) {
-		if (collider) {
+		if (collider && !collider->ToDelete()) {
 			collider->SetPreviousCollisions();
 		}
 	}
 
 	for (int i = 0; i < existingColliders.size(); i++) {
 		RectangleCollider* a = existingColliders[i];
-		if (!a) continue;
+		if (!a || a->ToDelete()) continue;
 
 		for (int j = i + 1; j < existingColliders.size(); j++) {
 			RectangleCollider* b = existingColliders[j];
-			if (!b) continue;
+			if (!b || b->ToDelete()) continue;
 
 			if (a->CheckIfCollided(b)) {
 				
@@ -100,6 +115,29 @@ void Scene::CheckCollisions()
 				if (!a->AlreadyColliding(b)) {
 					a->Parent()->OnCollisionEnter(b);
 					b->Parent()->OnCollisionEnter(a);
+				}
+				else {
+					//!a->IsRigid() ? a->Parent()->OnCollisionStay(b) : a->PushAway(b->Parent());
+					//!b->IsRigid() ? b->Parent()->OnCollisionStay(a) : b->PushAway(a->Parent());
+					a->Parent()->OnCollisionStay(b);
+					b->Parent()->OnCollisionStay(a);
+				}
+
+				a->SolveCollision(b);
+			}
+		}
+	}
+
+	for (RectangleCollider* collider : existingColliders) {
+		if (collider && !collider->ToDelete()) {
+			for (RectangleCollider* previous : collider->previousCollisions) {
+
+				if (!ColliderStillExists(previous)) {
+					continue;
+				}
+
+				if (std::find(collider->currentCollisions.begin(), collider->currentCollisions.end(), previous) == collider->currentCollisions.end()) {
+					collider->Parent()->OnCollisionExit(previous);
 				}
 			}
 		}

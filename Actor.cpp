@@ -1,7 +1,7 @@
 #include "Actor.h"
 #include "Scene.h"
 #include "Component.h"
-#include "Collider.h"
+#include "RectangleCollider.h"
 #include "Parameters.h"
 
 Actor::Actor(Scene* myScene)
@@ -51,6 +51,10 @@ bool Actor::ToDelete()
 void Actor::ToDelete(bool b)
 {
 	toDelete = b;
+
+	for (Component* component : components) {
+		component->ToDelete(b);
+	}
 }
 
 void Actor::Tag(std::string tag)
@@ -63,6 +67,10 @@ void Actor::OnCollisionEnter(Collider* other)
 }
 
 void Actor::OnCollisionStay(Collider* other)
+{
+}
+
+void Actor::OnCollisionExit(Collider* other)
 {
 }
 

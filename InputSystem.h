@@ -9,6 +9,7 @@ public:
 	static void CreateMap(std::string name);
 	static void CreateMap(std::string name, SDL_Keycode key, bool inverted = false);
 	static void DeleteMap(std::string name);
+	static void ResetInputs();
 
 	static InputMap* Map(const std::string name);
 
@@ -23,6 +24,7 @@ public:
 private:
 	static std::map<int, bool> keyDown;
 	static std::map<std::string, InputMap*> maps;
+	static std::vector<std::string> mapsToDelete;
 
 	~InputSystem();
 

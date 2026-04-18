@@ -6,7 +6,7 @@
 CreditsScene::CreditsScene(GraphicsInterface* GI):Scene(GI)
 {
 	InputSystem::CreateMap("GoBackToMainMenu");
-	InputSystem::Map("GoBackToMainMenu")->AddBinding(SDLK_F);
+	InputSystem::Map("GoBackToMainMenu")->AddBinding(SDLK_RETURN);
 	InputSystem::Map("GoBackToMainMenu")->AddListener(this, &CreditsScene::HandleInput, InputEvent::Triggered);
 
 	actors.push_back(new Text(this, "Juego basado en el Commando Commodore 64", Vector2(100, 120)));
@@ -17,6 +17,7 @@ CreditsScene::CreditsScene(GraphicsInterface* GI):Scene(GI)
 
 CreditsScene::~CreditsScene()
 {
+	InputSystem::DeleteMap("GoBackToMainMenu");
 }
 
 void CreditsScene::HandleInput()

@@ -14,8 +14,10 @@ MenuScene::MenuScene(GraphicsInterface* GI) : Scene(GI)//, selectedOption(0)
 
 	InputSystem::Map("MoveOptionsMenu")->AddBinding(SDLK_UP, true);
 	InputSystem::Map("MoveOptionsMenu")->AddBinding(SDLK_DOWN);
+	InputSystem::Map("MoveOptionsMenu")->AddBinding(SDLK_W, true);
+	InputSystem::Map("MoveOptionsMenu")->AddBinding(SDLK_S);
 
-	InputSystem::Map("EnterToOptionSelected")->AddBinding(SDLK_T);
+	InputSystem::Map("EnterToOptionSelected")->AddBinding(SDLK_RETURN);
 
 	InputSystem::Map("MoveOptionsMenu")->AddListener(this, &MenuScene::HandleInput, InputEvent::Triggered);
 	InputSystem::Map("EnterToOptionSelected")->AddListener(this, &MenuScene::ChangeToScene, InputEvent::Triggered);
@@ -34,8 +36,8 @@ MenuScene::MenuScene(GraphicsInterface* GI) : Scene(GI)//, selectedOption(0)
 
 MenuScene::~MenuScene()
 {
-	//InputSystem::DeleteMap("MoveOptionsMenu");
-	//InputSystem::DeleteMap("EnterToOptionSelected");
+	InputSystem::DeleteMap("MoveOptionsMenu");
+	InputSystem::DeleteMap("EnterToOptionSelected");
 }
 
 void MenuScene::HandleInput()

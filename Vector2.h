@@ -33,6 +33,14 @@ public:
 		return *this;
 	}
 
+	Vector2 operator-=(const Vector2& v2) {
+
+		x -= v2.x;
+		y -= v2.y;
+
+		return *this;
+	}
+
 	static Vector2 Bezier(Vector2 originPos, Vector2 middlePos, Vector2 targetPos, float time);
 
 	static int DirectionIndex(Vector2 direction, int numDirections);

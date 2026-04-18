@@ -10,7 +10,7 @@
 #include "InputSystem.h"
 #include "Pickeable.h"
 #include "HUD.h"
-#include "PauseMenu.h"
+#include "WorldBarrier.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -49,6 +49,22 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	actors.push_back(hud);
 
 	actors.push_back(player);
+
+	WorldBarrier* leftBarrier = new WorldBarrier(this, map, player, Vector2(50, 200), Vector2(640, 3120), false);
+	leftBarrier->AlignLeft();
+	actors.push_back(leftBarrier);
+
+	WorldBarrier* rightBarrier = new WorldBarrier(this, map, player, Vector2(50, 200), Vector2(640, 3120), false);
+	rightBarrier->AlignRight();
+	actors.push_back(rightBarrier);
+
+	WorldBarrier* bottomBarrier = new WorldBarrier(this, map, player, Vector2(640, 50), Vector2(640, 3120));
+	bottomBarrier->AlignBottom();
+	actors.push_back(bottomBarrier);
+
+	WorldBarrier* topBarrier = new WorldBarrier(this, map, player, Vector2(640, 50), Vector2(640, 3120));
+	topBarrier->AlignTop();
+	actors.push_back(topBarrier);
 
 	mainCamera = new Camera(this, player);
 	mainCamera->HorizontalMovement(false);
