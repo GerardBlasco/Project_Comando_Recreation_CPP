@@ -15,7 +15,7 @@ DefeatScene::DefeatScene(GraphicsInterface* GI): Scene(GI)
 	InputSystem::Map("VictorySceneInputs")->AddBinding(SDLK_D, true);
 
 	//Aceptar seleccion
-	InputSystem::Map("ChangeToSelectedOption")->AddBinding(SDLK_Q);
+	InputSystem::Map("ChangeToSelectedOption")->AddBinding(SDLK_RETURN);
 
 	InputSystem::Map("VictorySceneInputs")->AddListener(this, &DefeatScene::HandleInput, InputEvent::Triggered);
 	InputSystem::Map("ChangeToSelectedOption")->AddListener(this, &DefeatScene::ChangeToScene, InputEvent::Triggered);
