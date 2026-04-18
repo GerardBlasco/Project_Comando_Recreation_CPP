@@ -21,7 +21,5 @@ CreditsScene::~CreditsScene()
 
 void CreditsScene::HandleInput()
 {
-
 	Game::ChangeScene(new MenuScene(GI));
-
 }

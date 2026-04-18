@@ -11,9 +11,15 @@
 #include "Scene.h"
 #include "Color.h"
 #include "Animator.h"
+#include "DefeatScene.h"
+#include "PauseMenu.h"
 
 Player::Player(Scene* myScene):Actor(myScene)
 {
+	health = 5;
+	granadesLeft = 5;
+
+
 	AddComponent(new RectangleCollider(this, 40, 40, Color(0, 0, 255, 255)));
 
 	animator = new Animator(this);
@@ -58,6 +64,51 @@ Player::Player(Scene* myScene):Actor(myScene)
 	InputSystem::Map("SecondaryAttack")->AddListener(this, &Player::ShootAlternative, InputEvent::Triggered);
 }
 
+//METODOS PARA LA VIDA
+void Player::LoseHealth(const int quantity)
+{
+	health = health - quantity;
+}
+
+void Player::OnCollisionEnter(Collider* other)
+{
+	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
+	{
+		LoseHealth(1); //Llamamos a la funcion LoseHealth()
+
+		//Si la vida es menor o igual a 0
+		if (health <= 0) {
+			Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+		}
+	}
+}
+
+int Player::GetHealth()
+{
+	return health;
+}
+
+//METODOS PARA GRANADAS
+void Player::SetGranadesQuantity(int quantity)
+{
+	granadesLeft = granadesLeft + quantity;
+}
+
+int Player::GetGranades()
+{
+	return granadesLeft;
+}
+
+void Player::LoseGranade()
+{
+	granadesLeft -= 1;
+
+	//que el texto se quede a 0 si no tiene mas
+	if (granadesLeft <= 0) {
+		granadesLeft = 0;
+	}
+}
+
 //METODOS PARA PUNTUACION
 void Player::AddScore(int amount)
 {
@@ -68,9 +119,11 @@ int Player::GetScore()
 {
 	return score;
 }
+//----------------------------//
 
 void Player::Update() 
 {
+
 	bool isMoving = InputSystem::Map("Horizontal")->performed || InputSystem::Map("Vertical")->performed;
 
 	Vector2 mousePosition(InputSystem::DeltaX(), InputSystem::DeltaY());
@@ -93,8 +146,12 @@ void Player::Update()
 		animator->SetCurrentAnimationName(animationName);
 		animator->PlayAnimation(animationName);
 	}
+
+	
+
 }
 
+//METODOS DE MOVIMIENTO DEL PERSONAJE
 void Player::MoveHorizontal()
 {
 	transform.position.x += InputSystem::Map("Horizontal")->ReadFloat() * 200.f * Game::DeltaTime();
@@ -105,6 +162,8 @@ void Player::MoveVertical()
 	transform.position.y += InputSystem::Map("Vertical")->ReadFloat() * 200.f * Game::DeltaTime();
 }
 
+
+//METODOS DE DISPARO DEL PERSONAJE
 void Player::Shoot()
 {
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
@@ -115,8 +174,12 @@ void Player::Shoot()
 
 void Player::ShootAlternative()
 {
+	if (granadesLeft <= 0) return; //si no tiene granadas, salimos del metodo
+
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
 
 	Weapon* granade = new Granade(myScene, transform.position, mouseWorldPosition);
 	myScene->LoadActor(granade);
+
+	LoseGranade();//perdemos 1 granada
 }

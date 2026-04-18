@@ -47,8 +47,8 @@ Game::Game()
 	GI = new GraphicsInterface();
 	currentScene = new MenuScene(GI);
 
-	InputSystem::CreateMap("CloseGame");
-	InputSystem::Map("CloseGame")->AddBinding(SDLK_ESCAPE);
+	InputSystem::CreateMap("Pause");
+	InputSystem::Map("Pause")->AddBinding(SDLK_ESCAPE);
 }
 
 Game::~Game()
@@ -60,9 +60,10 @@ void Game::Update()
 {
 	InputSystem::Update();
 
-	if (InputSystem::Map("CloseGame")->triggered || InputSystem::EventQuit()) {
+	if (InputSystem::EventQuit()) {
 		game_end = true;
 	}
+
 
 	currentScene->Update();
 }

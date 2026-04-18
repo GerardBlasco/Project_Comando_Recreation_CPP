@@ -1,20 +1,20 @@
 #pragma once
 #include "Scene.h"
-class MenuScene : public Scene
+#include "GraphicsInterface.h"
+
+class DefeatScene: public Scene
 {
 public:
-	MenuScene(GraphicsInterface* GI);
-	virtual ~MenuScene();
+	DefeatScene(GraphicsInterface* GI);
 	virtual void HandleInput();
 	virtual void ChangeToScene();
 
 private:
 	int selectedOption = 0;
 
-	//Opciones que puede escojer el player
 	class Text* menuOption1;
 	class Text* menuOption2;
-	class Text* menuOption3;
-	class Text* menuOption4;
+
+
 };
 

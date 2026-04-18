@@ -10,6 +10,7 @@
 #include "InputSystem.h"
 #include "Pickeable.h"
 #include "HUD.h"
+#include "PauseMenu.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -41,10 +42,12 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	map->AlignToBottom();
 	actors.push_back(map);
 
-	HUD* hud = new HUD(this);
-	actors.push_back(hud);
 
 	Player* player = new Player(this);
+
+	HUD* hud = new HUD(this, player);
+	actors.push_back(hud);
+
 	actors.push_back(player);
 
 	mainCamera = new Camera(this, player);
@@ -55,7 +58,7 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 
 	actors.push_back(enemy);
 
-	Pickeable* pickeable = new Pickeable(this);
+	Pickeable* pickeable = new Pickeable(this, player);
 
 	actors.push_back(pickeable);
 

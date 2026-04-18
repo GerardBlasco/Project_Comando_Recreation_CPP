@@ -2,8 +2,10 @@
 #include "Animation.h"
 #include "RectangleCollider.h"
 
-Pickeable::Pickeable(Scene* myScene):Actor(myScene)
+Pickeable::Pickeable(Scene* myScene, Player* target):Actor(myScene)
 {
+	this->player = target; //se guarda el player
+
 	transform.position = Vector2(600, 600);
 	AddComponent(new RectangleCollider(this, 38, 38, Color(0, 0, 255, 255)));
 
@@ -14,7 +16,8 @@ Pickeable::Pickeable(Scene* myScene):Actor(myScene)
 
 void Pickeable::OnCollisionEnter(Collider* other)
 {
-	if (other->Parent()->tag == "Player") {
-		toDelete = true;
+	if (other->Parent()->tag == "Player") { //si colisiona con algo con ese tag
+		player->SetGranadesQuantity(5); //llama al metodo
+		toDelete = true; //eliminala
 	}
 }
