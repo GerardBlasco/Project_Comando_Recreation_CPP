@@ -5,7 +5,10 @@
 Pickeable::Pickeable(Scene* myScene):Actor(myScene)
 {
 	transform.position = Vector2(600, 600);
-	AddComponent(new RectangleCollider(this, 38, 38, Color(0, 0, 255, 255)));
+
+	RectangleCollider* collider = new RectangleCollider(this, 38, 38, Color(0, 0, 255, 255));
+	collider->IsTrigger(true);
+	AddComponent(collider);
 
 	Animation* animation = new Animation(this, "granade_stack.png", 2, 1, 38, 38, 0.3f);
 	animation->LoadFrames(0, 0, 2);

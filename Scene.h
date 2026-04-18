@@ -10,6 +10,7 @@ protected:
 	std::vector<class Actor*> actorsToAdd;
 	std::vector<class Actor*> actors;
 	std::vector<class RectangleCollider*> existingColliders;
+	std::vector<class RectangleCollider*> collidersToDelete;
 
 public:
 	GraphicsInterface* GI;
@@ -26,6 +27,8 @@ public:
 
 	virtual void HandleInput();
 	virtual void ChangeToScene();
+
+	bool ColliderStillExists(RectangleCollider* collider);
 
 	std::vector<class Actor*> GetAllActors();
 

@@ -9,10 +9,16 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	void ToDelete(bool b);
+	bool ToDelete();
+
 	Actor* Parent();
 
 protected:
 	class Actor* parent;
+
+private:
+	bool toDelete = false;
 
 };
 

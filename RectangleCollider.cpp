@@ -3,13 +3,13 @@
 #include "Scene.h"
 #include <iostream>
 
-RectangleCollider::RectangleCollider(Actor* parent, float width, float height):Collider(parent, width, height)
+RectangleCollider::RectangleCollider(Actor* parent, float width, float height, bool isRigid):Collider(parent, width, height, isRigid)
 {
 	leftTop = Vector2(parent->transform.position.x - (width / 2), parent->transform.position.y - (height / 2));
 	parent->myScene->LoadCollider(this);
 }
 
-RectangleCollider::RectangleCollider(Actor* parent, float width, float height, Color color):Collider(parent, width, height, color)
+RectangleCollider::RectangleCollider(Actor* parent, float width, float height, Color color, bool isRigid):Collider(parent, width, height, color, isRigid)
 {
 	leftTop = Vector2(parent->transform.position.x - (width / 2), parent->transform.position.y - (height / 2));
 	parent->myScene->LoadCollider(this);
@@ -51,4 +51,54 @@ void RectangleCollider::SetPreviousCollisions()
 bool RectangleCollider::AlreadyColliding(RectangleCollider* other)
 {
 	return std::find(previousCollisions.begin(), previousCollisions.end(), other) != previousCollisions.end();
+}
+
+Vector2 RectangleCollider::GetCenter()
+{
+	return Vector2(leftTop.x + (width * 0.5f), leftTop.y + (height * 0.5f));
+}
+
+void RectangleCollider::SolveCollision(RectangleCollider* other)
+{
+	if (IsTrigger() || other->IsTrigger()) {
+		return;
+	}
+	
+	if (!IsRigid() && !other->IsRigid()) {
+		return;
+	}
+
+	float overlapLeft = other->Right() - Left();
+	float overlapRight = Right() - other->Left();
+	float overlapTop = other->Bottom() - Top();
+	float overlapBottom = Bottom() - other->Top();
+
+	float minOverlapX = (overlapLeft < overlapRight) ? overlapLeft : overlapRight;
+	float minOverlapY = (overlapTop < overlapBottom) ? overlapTop : overlapBottom;
+
+	Vector2 correction;
+
+	if (minOverlapX < minOverlapY) {
+		if (overlapLeft < overlapRight) {
+			correction.x = overlapLeft;
+		}
+		else {
+			correction.x = -overlapRight;
+		}
+	}
+	else {
+		if (overlapTop < overlapBottom) {
+			correction.y = overlapTop;
+		}
+		else {
+			correction.y = -overlapBottom;
+		}
+	}
+
+	if (!IsRigid()) {
+		parent->transform.position += correction;
+	}
+	else if (!other->IsRigid()) {
+		other->Parent()->transform.position -= correction;
+	}
 }

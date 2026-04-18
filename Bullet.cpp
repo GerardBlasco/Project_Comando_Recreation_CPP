@@ -13,7 +13,10 @@ Bullet::Bullet(Scene* myScene, Vector2 originPos, Vector2 targetPos):Weapon(mySc
 	transform.position = originPos;
 
 	AddComponent(new Sprite(this, "bullet.png", 14));
-	AddComponent(new RectangleCollider(this, 14, 14, Color(255, 0, 0, 255)));
+
+	RectangleCollider* collider = new RectangleCollider(this, 14, 14, Color(255, 0, 0, 255));
+	collider->IsTrigger(true);
+	AddComponent(collider);
 
 	direction = targetPos - originPos;
 

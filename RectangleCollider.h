@@ -10,8 +10,8 @@ public:
 
 	Vector2 leftTop;
 
-	RectangleCollider(Actor* parent, float width, float height);
-	RectangleCollider(Actor* parent, float width, float height, Color color);
+	RectangleCollider(Actor* parent, float width, float height, bool isRigid = false);
+	RectangleCollider(Actor* parent, float width, float height, Color color, bool isRigid = false);
 	~RectangleCollider();
 
 	virtual void Update();
@@ -21,11 +21,14 @@ public:
 
 	void SetPreviousCollisions();
 	bool AlreadyColliding(RectangleCollider* other);
+	Vector2 GetCenter();
 
-private:
+	void SolveCollision(RectangleCollider* other);
+
 	inline float Left() { return leftTop.x; }
 	inline float Right() { return leftTop.x + width; }
 	inline float Top() { return leftTop.y; }
 	inline float Bottom() { return leftTop.y + height; }
+private:
 };
 

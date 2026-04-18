@@ -9,5 +9,6 @@ public:
 	void AlignToBottom();
 
 	virtual void OnCollisionEnter(class Collider* other);
+	virtual void OnCollisionExit(class Collider* other);
 };
 
