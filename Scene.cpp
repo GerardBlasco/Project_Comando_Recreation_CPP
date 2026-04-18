@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Actor.h"
 #include "RectangleCollider.h"
+#include "Game.h"
 Scene::Scene(GraphicsInterface* GI)
 {
 	this->GI = GI;
@@ -42,6 +43,11 @@ void Scene::Update()
 		else {
 			i++;
 		}
+	}
+
+	if (waitingSceneChange) {
+		Game::ChangeScene(nextScene);
+		return;
 	}
 }
 

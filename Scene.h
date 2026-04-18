@@ -16,6 +16,9 @@ public:
 	GraphicsInterface* GI;
 	Camera* mainCamera;
 
+	bool waitingSceneChange = false;
+	Scene* nextScene;
+
 	Scene(GraphicsInterface* GI);
 	virtual ~Scene();
 	virtual void Update();

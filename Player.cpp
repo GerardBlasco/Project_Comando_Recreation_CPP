@@ -78,7 +78,7 @@ void Player::OnCollisionEnter(Collider* other)
 
 		//Si la vida es menor o igual a 0
 		if (health <= 0) {
-			Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+			dead = true;
 		}
 	}
 }
@@ -147,8 +147,11 @@ void Player::Update()
 		animator->PlayAnimation(animationName);
 	}
 
-	
-
+	if (dead) {
+		//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+		myScene->waitingSceneChange = true;
+		myScene->nextScene = new DefeatScene(myScene->GI);
+	}
 }
 
 //METODOS DE MOVIMIENTO DEL PERSONAJE

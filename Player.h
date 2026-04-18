@@ -25,6 +25,7 @@ public:
 
 private:
 	int score; //Puntuacion del player
+	bool dead = false;
 
 	class Animator* animator;
 

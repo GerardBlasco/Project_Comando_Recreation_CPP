@@ -101,12 +101,25 @@ void Enemy::Update()
 		cooldown -= Game::DeltaTime();
 
 		if (cooldown <= 0) {
-			Granade* bullet = new Granade(myScene, transform.position, target->transform.position);
-			bullet->Tag("EnemyAttack");
-			bullet->HitTag("Player");
-			myScene->LoadActor(bullet);
 
-			cooldown = 0.6f;
+			float shootProbability = rand() / (float)RAND_MAX;
+
+			if (shootProbability >= 0.15f) {
+				Bullet* bullet = new Bullet(myScene, transform.position, target->transform.position);
+				bullet->Tag("EnemyAttack");
+				bullet->HitTag("Player");
+				myScene->LoadActor(bullet);
+
+				cooldown = 0.3f;
+			}
+			else {
+				Granade* granade = new Granade(myScene, transform.position, target->transform.position);
+				granade->Tag("EnemyAttack");
+				granade->HitTag("Player");
+				myScene->LoadActor(granade);
+
+				cooldown = 0.7f;
+			}
 		}
 
 		if (time >= duration || playerDistance > shootDistance) {
