@@ -4,6 +4,7 @@
 #include "SDL3/SDL.h"
 #include "Parameters.h"
 #include "IntroScene.h"
+#include "MenuScene.h"
 #include <Windows.h>
 
 Game* Game::instance = 0;
@@ -21,6 +22,15 @@ void Game::Destroy()
 		delete instance;
 }
 
+void Game::ChangeScene(Scene* newScene)
+{
+	if (instance->currentScene) {
+		delete instance->currentScene;
+	}
+
+	instance->currentScene = newScene;
+}
+
 float Game::DeltaTime()
 {
 	return deltaTime;
@@ -35,7 +45,7 @@ void Game::Play()
 Game::Game()
 {
 	GI = new GraphicsInterface();
-	currentScene = new IntroScene(GI);
+	currentScene = new MenuScene(GI);
 
 	InputSystem::CreateMap("CloseGame");
 	InputSystem::Map("CloseGame")->AddBinding(SDLK_ESCAPE);

@@ -9,6 +9,8 @@ public:
 	static void Play();
 	static void Destroy();
 
+	static void ChangeScene(Scene* newScene);
+
 	static float DeltaTime();
 
 private:

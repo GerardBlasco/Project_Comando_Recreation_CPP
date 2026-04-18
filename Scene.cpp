@@ -63,6 +63,14 @@ void Scene::RemoveCollider(RectangleCollider* collider)
 	}
 }
 
+void Scene::HandleInput()
+{
+}
+
+void Scene::ChangeToScene()
+{
+}
+
 std::vector<Actor*> Scene::GetAllActors()
 {
 	return actors;

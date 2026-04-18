@@ -100,6 +100,8 @@ void InputSystem::UpdateInputs()
 void InputSystem::UpdateMaps()
 {
 	for (auto& pair : maps) {
-		pair.second->CheckIfKeyPressed(keyDown);
+		if (pair.second) {
+			pair.second->CheckIfKeyPressed(keyDown);
+		}
 	}
 }

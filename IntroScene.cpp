@@ -9,9 +9,11 @@
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
 #include "Pickeable.h"
+#include "HUD.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
+	GI->LoadImage("icon_granade.png");
 	GI->LoadImage("first_zone_map.png");
 	GI->LoadImage("player.png");
 	GI->LoadImage("bullet.png");
@@ -38,6 +40,9 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	Background* map = new Background(this, "first_zone_map.png", 640, 3120);
 	map->AlignToBottom();
 	actors.push_back(map);
+
+	HUD* hud = new HUD(this);
+	actors.push_back(hud);
 
 	Player* player = new Player(this);
 	actors.push_back(player);

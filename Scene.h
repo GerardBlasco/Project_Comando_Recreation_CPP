@@ -16,13 +16,16 @@ public:
 	Camera* mainCamera;
 
 	Scene(GraphicsInterface* GI);
-	~Scene();
+	virtual ~Scene();
 	virtual void Update();
 	virtual void Render();
 
 	void LoadActor(class Actor* actor);
 	void LoadCollider(class RectangleCollider* collider);
 	void RemoveCollider(class RectangleCollider* collider);
+
+	virtual void HandleInput();
+	virtual void ChangeToScene();
 
 	std::vector<class Actor*> GetAllActors();
 

@@ -7,8 +7,13 @@ GraphicsInterface::GraphicsInterface()
 {
 	//Abrimos ventana e inicializamos gráficos
 	SDL_Init(SDL_INIT_VIDEO);
-
+	TTF_Init(); // Para la fuente del texto
 	SDL_CreateWindowAndRenderer(Parameters::window_title, Parameters::width, Parameters::height, 0, &window, &renderer);
+
+	font = TTF_OpenFont((fontsPath + "VCR_OSD_MONO_1.001.ttf").c_str(), 32); //Fuente de texto
+	if (!font) {
+		std::cout << "No se ha encontrado la fuente";
+	}
 }
 
 GraphicsInterface::~GraphicsInterface()
@@ -20,9 +25,10 @@ GraphicsInterface::~GraphicsInterface()
 
 bool GraphicsInterface::LoadImage(std::string path)
 {
-	SDL_Texture* txt = IMG_LoadTexture(renderer, path.c_str());
+	std::string fullImgName = imgPath + path;
+	SDL_Texture* txt = IMG_LoadTexture(renderer, fullImgName.c_str());
 
-	imageColection.insert(std::make_pair(path, txt));
+	imageColection.insert(std::make_pair(fullImgName, txt));
 
 	return false;
 }
@@ -39,7 +45,8 @@ bool GraphicsInterface::MustWindowClose()
 
 SDL_Texture* GraphicsInterface::GetTexture(std::string name)
 {
-	return imageColection[name];
+	std::string fullImgName = imgPath + name;
+	return imageColection[fullImgName];
 }
 
 void GraphicsInterface::ClearFrame()
@@ -61,7 +68,8 @@ void GraphicsInterface::DrawSprite(std::string imgName, Transform transform, flo
 	rect.w = width;
 	rect.h = height;
 
-	SDL_RenderTexture(renderer, imageColection[imgName], NULL, &rect);
+	std::string fullImgName = imgPath + imgName;
+	SDL_RenderTexture(renderer, imageColection[fullImgName], NULL, &rect);
 }
 
 void GraphicsInterface::DrawSprite(std::string imgName, Vector2 position, float width, float height)
@@ -72,7 +80,8 @@ void GraphicsInterface::DrawSprite(std::string imgName, Vector2 position, float 
 	rect.w = width;
 	rect.h = height;
 
-	SDL_RenderTexture(renderer, imageColection[imgName], NULL, &rect);
+	std::string fullImgName = imgPath + imgName;
+	SDL_RenderTexture(renderer, imageColection[fullImgName], NULL, &rect);
 }
 
 void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Transform transform, float width, float height)
@@ -83,7 +92,8 @@ void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Transform t
 	rect.w = width;
 	rect.h = height;
 
-	SDL_RenderTexture(renderer, imageColection[imgName], &frame.position, &rect);
+	std::string fullImgName = imgPath + imgName;
+	SDL_RenderTexture(renderer, imageColection[fullImgName], &frame.position, &rect);
 }
 
 void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Vector2 position, float width, float height)
@@ -94,7 +104,8 @@ void GraphicsInterface::DrawSprite(std::string imgName, Frame frame, Vector2 pos
 	rect.w = width;
 	rect.h = height;
 
-	SDL_RenderTexture(renderer, imageColection[imgName], &frame.position, &rect);
+	std::string fullImgName = imgPath + imgName;
+	SDL_RenderTexture(renderer, imageColection[fullImgName], &frame.position, &rect);
 }
 
 void GraphicsInterface::DrawLine(float left, float top, float right, float bottom)
@@ -115,4 +126,31 @@ void GraphicsInterface::DrawRectangle(Vector2 leftTop, float width, float height
 	SDL_FRect rectangle = { leftTop.x, leftTop.y, width, height };
 	SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 	SDL_RenderRect(renderer, &rectangle);
+}
+
+void GraphicsInterface::DrawText(const std::string& text, int x, int y)
+{
+	if (!font) return;
+
+	SDL_Color color = { 255, 255, 255, 255 };
+
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), text.length(), color);
+	if (!surface) return;
+
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture) {
+		SDL_DestroySurface(surface);
+		return;
+	}
+
+	SDL_FRect rect;
+	rect.x = x;
+	rect.y = y;
+	rect.w = surface->w;
+	rect.h = surface->h;
+
+	SDL_RenderTexture(renderer, texture, NULL, &rect);
+
+	SDL_DestroyTexture(texture);
+	SDL_DestroySurface(surface);
 }
