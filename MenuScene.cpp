@@ -81,7 +81,7 @@ void MenuScene::ChangeToScene()
 		Game::ChangeScene(new CreditsScene(GI));
 		break;
 	case 3:
-		//Game::QuitGame();
+		Game::QuitGame();
 		break;
 	}
 }

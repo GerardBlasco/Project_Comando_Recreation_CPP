@@ -13,7 +13,9 @@ public:
 
 	static float DeltaTime();
 
-	//int globalHighScore;
+	static void QuitGame();
+
+	static int globalHighScore;
 
 private:
 	static Game* instance;

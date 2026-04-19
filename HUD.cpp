@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include <sstream>
+#include "Game.h"
 
 HUD::HUD(Scene* myScene, Player* player) :Actor(myScene)
 {
@@ -17,10 +18,12 @@ void HUD::Update()
 	health = player->GetHealth(); //guardamos las vidas que le quedan
 	granadesQuantity = player->GetGranades();//guardamos la cantidad de granadas que le quedan
 
-	if (playerScore > highScore) 
+	//Guardamos la highSCore global porque sino se eliminaria
+	if (playerScore > Game::globalHighScore)
 	{
-		highScore = playerScore;
+		Game::globalHighScore = playerScore;
 	}
+
 }
 
 void HUD::Render()
@@ -67,6 +70,6 @@ void HUD::Render()
 	myScene->GI->DrawText("HI: ", 700, 600);
 
 	std::stringstream ss2;
-	ss2 << highScore;
+	ss2 << Game::globalHighScore;
 	myScene->GI->DrawText(ss2.str(), 800, 600);
 }

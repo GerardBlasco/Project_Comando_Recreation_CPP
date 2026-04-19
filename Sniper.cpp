@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "Game.h"
 #include "RectangleCollider.h"
+#include "AudioManager.h"
 
 Sniper::Sniper(Scene* myScene, Player* target):Enemy(myScene, target)
 {
@@ -132,6 +133,10 @@ void Sniper::Update()
 void Sniper::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
+
+		//Sonido
+		AudioManager::instance().playSFX("death_enemy_sound.mp3");
+		AudioManager::instance().setSFXVolume(30);
 
 		player->AddScore(200); //sumamos al player una puntuacionn de 100 por cada enemigo matado
 

@@ -10,7 +10,7 @@
 
 Game* Game::instance = 0;
 float Game::deltaTime = 0.0f;
-//int Game::globalHighScore = 0;
+int Game::globalHighScore = 0;
 
 void Game::Create()
 {
@@ -38,6 +38,11 @@ void Game::ChangeScene(Scene* newScene)
 float Game::DeltaTime()
 {
 	return deltaTime;
+}
+
+void Game::QuitGame()
+{
+	exit(0);
 }
 
 void Game::Play()

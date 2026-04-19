@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Granade.h";
+#include "AudioManager.h"
 
 Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 {
@@ -141,6 +142,10 @@ void Enemy::Update()
 void Enemy::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
+
+		//Sonido
+		AudioManager::instance().playSFX("death_enemy_sound.mp3");
+		AudioManager::instance().setSFXVolume(50);
 
 		player->AddScore(100); //sumamos al player una puntuacionn de 100 por cada enemigo matado
 

@@ -76,6 +76,12 @@ void Player::OnCollisionEnter(Collider* other)
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
 		if (!isInvulnerable) {
+
+			//Sonido
+			AudioManager::instance().playSFX("hurted_sound.mp3");
+			AudioManager::instance().setSFXVolume(10);
+
+
 			LoseHealth(1); //Llamamos a la funcion LoseHealth()
 
 			isInvulnerable = true;
@@ -156,9 +162,13 @@ void Player::Update()
 	}
 
 	if (dead) {
-		//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+		//Game::ChangeScene(new DefeatScene(myScene->GI));
+
+		AudioManager::instance().playSFX("lose_sound.mp3");
+		AudioManager::instance().setSFXVolume(30);
+
 		myScene->waitingSceneChange = true;
-		myScene->nextScene = new DefeatScene(myScene->GI);
+		myScene->nextScene = new DefeatScene(myScene->GI); //cambiamos a la escena de derrota
 	}
 
 	if (isInvulnerable) {
@@ -207,7 +217,7 @@ void Player::MoveVertical()
 //METODOS DE DISPARO DEL PERSONAJE
 void Player::Shoot()
 {
-
+	//Sonido
 	AudioManager::instance().playSFX("shoot_sound.mp3");
 	AudioManager::instance().setSFXVolume(30);
 
@@ -220,6 +230,9 @@ void Player::Shoot()
 void Player::ShootAlternative()
 {
 	if (granadesLeft <= 0) return; //si no tiene granadas, salimos del metodo
+
+	AudioManager::instance().playSFX("granade_shoot.mp3");
+	AudioManager::instance().setSFXVolume(30);
 
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
 

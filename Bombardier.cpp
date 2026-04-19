@@ -3,6 +3,7 @@
 #include "Animator.h"
 #include "Granade.h"
 #include "Game.h"
+#include "AudioManager.h"
 
 Bombardier::Bombardier(Scene* myScene, Player* target):Enemy(myScene, target)
 {
@@ -123,6 +124,10 @@ void Bombardier::Update()
 void Bombardier::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
+
+		//Sonido
+		AudioManager::instance().playSFX("death_enemy_sound.mp3");
+		AudioManager::instance().setSFXVolume(30);
 
 		player->AddScore(200); //sumamos al player una puntuacionn de 100 por cada enemigo matado
 
