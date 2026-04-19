@@ -58,7 +58,7 @@ std::map<std::string, class Animation*> Animator::Animations()
 void Animator::LoadDirectionsOrder(std::map<int, std::string> orderedDirections)
 {
 	for (auto& pair : orderedDirections) {
-		std::cout << "Key: " << pair.first << " | Name: " << pair.second << std::endl;
+		//std::cout << "Key: " << pair.first << " | Name: " << pair.second << std::endl;
 		directions[pair.first] = pair.second;
 	}
 }
