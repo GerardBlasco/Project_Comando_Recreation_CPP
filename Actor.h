@@ -34,5 +34,6 @@ public:
 
 protected:
 	bool toDelete = false;
+	bool visible = true;
 };
 

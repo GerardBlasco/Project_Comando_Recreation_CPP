@@ -5,7 +5,7 @@ class IntroScene : public Scene
 {
 public:
 	IntroScene(GraphicsInterface* GI);
-	//~IntroScene();
+	virtual ~IntroScene();
 
 	//PauseMenu* pauseMenu= nullptr;
 };

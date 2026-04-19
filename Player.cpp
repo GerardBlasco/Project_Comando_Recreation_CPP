@@ -82,19 +82,27 @@ void Player::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
-		//Sonido cuando hacen daño al player
-		AudioManager::instance().playSFX("hurted_sound.mp3");
-		AudioManager::instance().setSFXVolume(10);
+		//Llamamos a la funcion LoseHealth()
+		if (!isInvulnerable) {
+			//Sonido cuando hacen daño al player
+			AudioManager::instance().playSFX("hurted_sound.mp3");
+			AudioManager::instance().setSFXVolume(10);
 
-		LoseHealth(1); //Llamamos a la funcion LoseHealth()
+			LoseHealth(1); //Llamamos a la funcion LoseHealth()
 
-		//Si la vida es menor o igual a 0
-		if (health <= 0) {
-			//Sonido de derrota
-			AudioManager::instance().playSFX("lose_sound.mp3");
-			AudioManager::instance().setSFXVolume(30);
+			//Si la vida es menor o igual a 0
+			if (health <= 0) {
+				//Sonido de derrota
+				AudioManager::instance().playSFX("lose_sound.mp3");
+				AudioManager::instance().setSFXVolume(30);
 
-			Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+				//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+				dead = true;
+				isInvulnerable = true;
+				time = 0.f;
+				blinkTime = 0.f;
+				visible = true;
+			}
 		}
 	}
 }
@@ -163,8 +171,41 @@ void Player::Update()
 		animator->PlayAnimation(animationName);
 	}
 
-	
+	if (dead) {
+		//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
+		myScene->waitingSceneChange = true;
+		myScene->nextScene = new DefeatScene(myScene->GI);
+	}
 
+	if (isInvulnerable) {
+		time += Game::DeltaTime();
+		blinkTime += Game::DeltaTime();
+
+		if (blinkTime >= blinkDuration) {
+			blinkTime = 0.f;
+			visible = !visible;
+
+			for (auto& pair : animator->Animations())
+			{
+				if (visible) {
+					pair.second->Show();
+				}
+				else {
+					pair.second->Hide();
+				}
+			}
+		}
+
+		if (time >= duration) {
+			isInvulnerable = false;
+			visible = true;
+
+			for (auto& pair : animator->Animations())
+			{
+				pair.second->Show();
+			}
+		}
+	}
 }
 
 //METODOS DE MOVIMIENTO DEL PERSONAJE

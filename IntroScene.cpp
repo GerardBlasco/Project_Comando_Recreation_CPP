@@ -6,11 +6,15 @@
 #include "Player.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "Bombardier.h"
+#include "Sniper.h"
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
 #include "Pickeable.h"
 #include "HUD.h"
 #include "WorldBarrier.h"
+#include "WorldObstacle.h"
+#include "MapFirstZone.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -20,9 +24,12 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
 	GI->LoadImage("enemy.png");
+	GI->LoadImage("bombardier.png");
+	GI->LoadImage("sniper.png");
 	GI->LoadImage("bullet_explosion.png");
 	GI->LoadImage("explosion.png");
 	GI->LoadImage("granade_stack.png");
+	GI->LoadImage("palmtree.png");
 
 	InputSystem::CreateMap("Horizontal");
 	InputSystem::CreateMap("Vertical");
@@ -43,6 +50,10 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	Background* map = new Background(this, "first_zone_map.png", 640, 3120);
 	map->AlignToBottom();
 	actors.push_back(map);
+	this->background = map;
+
+	currentData = MapFirstZone::Get();
+	GenerateObstacles();
 
 	//PLAYER
 	Player* player = new Player(this);
@@ -79,10 +90,27 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	Enemy* enemy = new Enemy(this, player);
 	actors.push_back(enemy);
 
+	Enemy* bombardier = new Bombardier(this, player);
+	actors.push_back(bombardier);
+
+	Enemy* sniper = new Sniper(this, player);
+	actors.push_back(sniper);
+
 	//OBJETO PICKEABLE
 	Pickeable* pickeable = new Pickeable(this, player);
+
+	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
+	//actors.push_back(sprite);
 	actors.push_back(pickeable);
 
+}
+
+IntroScene::~IntroScene()
+{
+	InputSystem::DeleteMap("Horizontal");
+	InputSystem::DeleteMap("Vertical");
+	InputSystem::DeleteMap("PrimaryAttack");
+	InputSystem::DeleteMap("SecondaryAttack");
 }
 
 

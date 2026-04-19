@@ -25,6 +25,13 @@ public:
 
 private:
 	int score; //Puntuacion del player
+	bool dead = false;
+
+	bool isInvulnerable = false;
+	float time = 0.f;
+	float duration = 1.f;
+	float blinkTime = 0.f;
+	float blinkDuration = 0.1f;
 
 	class Animator* animator;
 
