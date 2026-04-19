@@ -30,6 +30,11 @@ DefeatScene::DefeatScene(GraphicsInterface* GI): Scene(GI)
 	actors.push_back(menuOption2);
 
 }
+DefeatScene::~DefeatScene()
+{
+	InputSystem::DeleteMap("VictorySceneInputs");
+	InputSystem::DeleteMap("ChangeToSelectedOption");
+}
 void DefeatScene::HandleInput()
 {
 	float value = InputSystem::Map("DefeatSceneInputs")->ReadFloat(); //Lee el float de ese input -1 o 1

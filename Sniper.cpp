@@ -1,26 +1,18 @@
-#include "Enemy.h"
+#include "Sniper.h"
 #include "Animator.h"
-#include "RectangleCollider.h"
-#include "Game.h"
-#include "Player.h"
 #include "Bullet.h"
-#include "Granade.h";
-#include "AudioManager.h"
+#include "Game.h"
+#include "RectangleCollider.h"
 
-Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
+Sniper::Sniper(Scene* myScene, Player* target):Enemy(myScene, target)
 {
-	AudioManager::instance().init(); //Inicializamos sound Manager
+	transform.position = Vector2(550, 50);
 
-	this->player = target; //se guarda el player
-	this->target = target;
-
-	transform.position = Vector2(400, 200);
 	tag = "Enemy";
-
-	AddComponent(new RectangleCollider(this, 40, 40, Color(0, 255, 255, 255)));
-
-	animator = new Animator(this);
-	AddComponent(animator);
+	moveSpeed = 100.f;
+	minDuration = 1.f;
+	maxDuration = 2.f;
+	shootDistance = 700.f;
 
 	std::map<int, std::string> directions =
 	{
@@ -46,17 +38,12 @@ Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 		"UpRight"
 	};
 
-	animator->GenerateAnimationsRange("enemy.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
-	animator->GenerateAnimationsRange("enemy.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
+	animator->GenerateAnimationsRange("sniper.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
+	animator->GenerateAnimationsRange("sniper.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
 	animator->LoadDirectionsOrder(directions);
 }
 
-Enemy::~Enemy()
-{
-	//AudioManager::instance().close();//Cerramos la instancia al audioManager
-}
-
-void Enemy::Update()
+void Sniper::Update() 
 {
 	time += Game::DeltaTime();
 
@@ -77,7 +64,7 @@ void Enemy::Update()
 			time = 0;
 		}
 
-		if (time >= duration) {
+		if (time >= duration || playerDistance <= (shootDistance * 0.3f)) {
 			state = EnemyState::Moving;
 			RandomDuration();
 			SeekDirection();
@@ -85,11 +72,17 @@ void Enemy::Update()
 		}
 
 		break;
-		
+
 	case EnemyState::Moving:
 
 		animator->SetCurrentIndex(Vector2::DirectionIndex(direction, 8));
 		animationName = "Walk" + animator->GetDirection(animator->GetCurrentIndex());
+
+		if (playerDistance <= (shootDistance * 0.3f)) {
+			RandomDuration();
+			SeekDirection();
+			time = 0;
+		}
 
 		transform.position += direction * moveSpeed * Game::DeltaTime();
 
@@ -100,7 +93,7 @@ void Enemy::Update()
 		}
 
 		break;
-		
+
 	case EnemyState::Shooting:
 
 		animator->SetCurrentIndex(Vector2::DirectionIndex(playerDirection, 8));
@@ -110,24 +103,14 @@ void Enemy::Update()
 
 		if (cooldown <= 0) {
 
-			float shootProbability = rand() / (float)RAND_MAX;
+			Bullet* bullet = new Bullet(myScene, transform.position, target->transform.position);
+			bullet->Tag("EnemyAttack");
+			bullet->HitTag("Player");
+			bullet->SetSpeed(1000.f);
+			bullet->SetMaxDistance(600.f);
+			myScene->LoadActor(bullet);
 
-			if (shootProbability >= 0.15f) {
-				Bullet* bullet = new Bullet(myScene, transform.position, target->transform.position);
-				bullet->Tag("EnemyAttack");
-				bullet->HitTag("Player");
-				myScene->LoadActor(bullet);
-
-				cooldown = 0.3f;
-			}
-			else {
-				Granade* granade = new Granade(myScene, transform.position, target->transform.position);
-				granade->Tag("EnemyAttack");
-				granade->HitTag("Player");
-				myScene->LoadActor(granade);
-
-				cooldown = 0.7f;
-			}
+			cooldown = 0.9f;
 		}
 
 		if (time >= duration || playerDistance > shootDistance) {
@@ -146,28 +129,29 @@ void Enemy::Update()
 	}
 }
 
-void Enemy::OnCollisionEnter(Collider* other)
+void Sniper::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
 
-		player->AddScore(100); //sumamos al player una puntuacionn de 100 por cada enemigo matado
-
-		//Sonido de enemigo muerto
-		AudioManager::instance().playSFX("death_enemy_sound.mp3");
-		AudioManager::instance().setSFXVolume(55);
+		player->AddScore(200); //sumamos al player una puntuacionn de 100 por cada enemigo matado
 
 		toDelete = true; //lo eliminamos
 	}
 }
 
-void Enemy::SeekDirection()
+void Sniper::SeekDirection()
 {
-	Vector2 newDirection = target->transform.position - transform.position;
+	Vector2 newDirection;
+
+	Vector2 playerDirection = target->transform.position - transform.position;
+	float playerDistance = playerDirection.Module();
+
+	if (playerDistance <= (shootDistance * 0.3f)) {
+		newDirection = transform.position - target->transform.position;
+	}
+	else {
+		newDirection = target->transform.position - transform.position;
+	}
 
 	direction = newDirection.Normalized();
-}
-
-void Enemy::RandomDuration()
-{
-	duration = minDuration + (rand() / (float)RAND_MAX) * (maxDuration - minDuration);
 }

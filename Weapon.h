@@ -19,6 +19,7 @@ protected:
 	Weapon(Scene* myScene, Vector2 originPos, Vector2 targetPos);
 
 public:
+	void SetSpeed(float speed);
 	void HitTag(std::string hitTag);
 
 	~Weapon();

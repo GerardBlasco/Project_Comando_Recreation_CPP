@@ -6,6 +6,7 @@ class DefeatScene: public Scene
 {
 public:
 	DefeatScene(GraphicsInterface* GI);
+	virtual ~DefeatScene();
 	virtual void HandleInput();
 	virtual void ChangeToScene();
 

@@ -12,5 +12,6 @@ public:
 	virtual void Move();
 
 	virtual void OnCollisionEnter(class Collider* other);
+	void SetMaxDistance(float maxDistance);
 };
 

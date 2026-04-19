@@ -45,7 +45,7 @@ void Animation::LoadFrames(float x, float y, int numFrames)
 
 void Animation::Render() 
 {
-	if (!playing) {
+	if (!playing || !visible) {
 		return;
 	}
 
@@ -85,4 +85,14 @@ void Animation::PlayOnce()
 void Animation::SetFrameRate(float frameRate)
 {
 	this->frameRate = frameRate;
+}
+
+void Animation::Show()
+{
+	visible = true;
+}
+
+void Animation::Hide()
+{
+	visible = false;
 }
