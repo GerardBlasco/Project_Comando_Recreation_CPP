@@ -74,11 +74,18 @@ void Player::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
-		//LoseHealth(1); //Llamamos a la funcion LoseHealth()
+		if (!isInvulnerable) {
+			LoseHealth(1); //Llamamos a la funcion LoseHealth()
 
-		//Si la vida es menor o igual a 0
-		if (health <= 0) {
-			dead = true;
+			isInvulnerable = true;
+			time = 0.f;
+			blinkTime = 0.f;
+			visible = true;
+
+			//Si la vida es menor o igual a 0
+			if (health <= 0) {
+				dead = true;
+			}
 		}
 	}
 }
@@ -151,6 +158,36 @@ void Player::Update()
 		//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
 		myScene->waitingSceneChange = true;
 		myScene->nextScene = new DefeatScene(myScene->GI);
+	}
+
+	if (isInvulnerable) {
+		time += Game::DeltaTime();
+		blinkTime += Game::DeltaTime();
+
+		if (blinkTime >= blinkDuration) {
+			blinkTime = 0.f;
+			visible = !visible;
+
+			for (auto& pair : animator->Animations())
+			{
+				if (visible) {
+					pair.second->Show();
+				}
+				else {
+					pair.second->Hide();
+				}
+			}
+		}
+
+		if (time >= duration) {
+			isInvulnerable = false;
+			visible = true;
+
+			for (auto& pair : animator->Animations())
+			{
+				pair.second->Show();
+			}
+		}
 	}
 }
 

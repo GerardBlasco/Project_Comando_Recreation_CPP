@@ -49,6 +49,11 @@ void Animator::Render()
 	currentAnimation->Render();
 }
 
+std::map<std::string, class Animation*> Animator::Animations()
+{
+	return animations;
+}
+
 void Animator::LoadDirectionsOrder(std::map<int, std::string> orderedDirections)
 {
 	for (auto& pair : orderedDirections) {

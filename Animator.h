@@ -24,6 +24,7 @@ public:
 	int GetCurrentIndex();
 
 	virtual void Render();
+	std::map<std::string, class Animation*> Animations();
 
 	void LoadDirectionsOrder(std::map<int, std::string> orderedDirections);
 	std::string GetDirection(int id);

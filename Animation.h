@@ -20,6 +20,7 @@ private:
 
 	bool playing = true;
 	bool loop = true;
+	bool visible = true;
 
 public:
 	Animation(Actor* parent, std::string sheetName, int columns, int rows, float width, float height);
@@ -32,5 +33,8 @@ public:
 
 	void PlayOnce();
 	void SetFrameRate(float frameRate);
+
+	void Show();
+	void Hide();
 };
 
