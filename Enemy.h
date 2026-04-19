@@ -17,10 +17,13 @@ public:
 	Player* player; //puntero al player
 
 protected:
+<<<<<<< HEAD
 	Vector2 direction; //Direccion del enemigo
 	class Player* target; //Target es el player
 	EnemyState state = EnemyState::Thinking;
 
+=======
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
 	class Animator* animator;
 	class Player* target;
 	float time = 0.0f;

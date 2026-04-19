@@ -120,10 +120,13 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VictoryScene.cpp">
+=======
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
     <ClCompile Include="Bombardier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -134,6 +137,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MapFirstZone.cpp">
+<<<<<<< HEAD
+=======
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefeatScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VictoryScene.cpp">
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -252,10 +270,13 @@
     <ClInclude Include="PauseMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VictoryScene.h">
+=======
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
     <ClInclude Include="Bombardier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -272,6 +293,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MapFirstZone.h">
+<<<<<<< HEAD
+=======
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefeatScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VictoryScene.h">
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

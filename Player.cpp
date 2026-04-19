@@ -82,6 +82,7 @@ void Player::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
+<<<<<<< HEAD
 		//Sonido cuando hacen daño al player
 		AudioManager::instance().playSFX("hurted_sound.mp3");
 		AudioManager::instance().setSFXVolume(10);
@@ -101,10 +102,28 @@ void Player::OnCollisionEnter(Collider* other)
 			time = 0.f;
 			blinkTime = 0.f;
 			visible = true;
+=======
+		//Llamamos a la funcion LoseHealth()
+		if (!isInvulnerable) {
+			//Sonido cuando hacen daño al player
+			AudioManager::instance().playSFX("hurted_sound.mp3");
+			AudioManager::instance().setSFXVolume(10);
+
+			LoseHealth(1); //Llamamos a la funcion LoseHealth()
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
 
 			//Si la vida es menor o igual a 0
 			if (health <= 0) {
+				//Sonido de derrota
+				AudioManager::instance().playSFX("lose_sound.mp3");
+				AudioManager::instance().setSFXVolume(30);
+
+				//Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
 				dead = true;
+				isInvulnerable = true;
+				time = 0.f;
+				blinkTime = 0.f;
+				visible = true;
 			}
 		}
 	}

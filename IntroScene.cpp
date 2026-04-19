@@ -52,10 +52,17 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	actors.push_back(map);
 	this->background = map;
 
+<<<<<<< HEAD
 	//PLAYER
 	currentData = MapFirstZone::Get();
 	GenerateObstacles();
 
+=======
+	currentData = MapFirstZone::Get();
+	GenerateObstacles();
+
+	//PLAYER
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
 	Player* player = new Player(this);
 
 	//HUD
@@ -98,11 +105,25 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 
 	//OBJETO PICKEABLE
 	Pickeable* pickeable = new Pickeable(this, player);
+<<<<<<< HEAD
+=======
+
+	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
+	//actors.push_back(sprite);
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
 	actors.push_back(pickeable);
 
 
 	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
 	//actors.push_back(sprite);
+}
+
+IntroScene::~IntroScene()
+{
+	InputSystem::DeleteMap("Horizontal");
+	InputSystem::DeleteMap("Vertical");
+	InputSystem::DeleteMap("PrimaryAttack");
+	InputSystem::DeleteMap("SecondaryAttack");
 }
 
 

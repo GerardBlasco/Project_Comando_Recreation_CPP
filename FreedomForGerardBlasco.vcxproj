@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Usuario\Downloads\ProyectoCPP\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\include;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\include;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Usuario\Downloads\ProyectoCPP\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\lib\x64;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\lib\x64;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL3_mixer.lib;SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -133,8 +133,13 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animator.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Bombardier.cpp" />
+=======
+    <ClCompile Include="Bombardier.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -176,8 +181,13 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animator.h" />
+<<<<<<< HEAD
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Bombardier.h" />
+=======
+    <ClInclude Include="Bombardier.h" />
+    <ClInclude Include="AudioManager.h" />
+>>>>>>> e2ce48c5058a7f4c55e5b9ff70eb93312d127a75
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
