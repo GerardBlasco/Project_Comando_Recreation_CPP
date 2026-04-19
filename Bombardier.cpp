@@ -1,23 +1,17 @@
-#include "Enemy.h"
-#include "Animator.h"
+#include "Bombardier.h"
 #include "RectangleCollider.h"
+#include "Animator.h"
+#include "Granade.h"
 #include "Game.h"
-#include "Player.h"
-#include "Bullet.h"
-#include "Granade.h";
 
-Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
+Bombardier::Bombardier(Scene* myScene, Player* target):Enemy(myScene, target)
 {
-	this->player = target; //se guarda el player
-	this->target = target;
+	transform.position = Vector2(500, 100);
 
-	transform.position = Vector2(400, 200);
 	tag = "Enemy";
-
-	AddComponent(new RectangleCollider(this, 40, 40, Color(0, 255, 255, 255)));
-
-	animator = new Animator(this);
-	AddComponent(animator);
+	moveSpeed = 150.f;
+	minDuration = 2.f;
+	maxDuration = 3.5f;
 
 	std::map<int, std::string> directions =
 	{
@@ -43,12 +37,12 @@ Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 		"UpRight"
 	};
 
-	animator->GenerateAnimationsRange("enemy.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
-	animator->GenerateAnimationsRange("enemy.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
+	animator->GenerateAnimationsRange("bombardier.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
+	animator->GenerateAnimationsRange("bombardier.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
 	animator->LoadDirectionsOrder(directions);
 }
 
-void Enemy::Update()
+void Bombardier::Update()
 {
 	time += Game::DeltaTime();
 
@@ -77,7 +71,7 @@ void Enemy::Update()
 		}
 
 		break;
-		
+
 	case EnemyState::Moving:
 
 		animator->SetCurrentIndex(Vector2::DirectionIndex(direction, 8));
@@ -92,7 +86,7 @@ void Enemy::Update()
 		}
 
 		break;
-		
+
 	case EnemyState::Shooting:
 
 		animator->SetCurrentIndex(Vector2::DirectionIndex(playerDirection, 8));
@@ -102,24 +96,12 @@ void Enemy::Update()
 
 		if (cooldown <= 0) {
 
-			float shootProbability = rand() / (float)RAND_MAX;
+			Granade* granade = new Granade(myScene, transform.position, target->transform.position);
+			granade->Tag("EnemyAttack");
+			granade->HitTag("Player");
+			myScene->LoadActor(granade);
 
-			if (shootProbability >= 0.15f) {
-				Bullet* bullet = new Bullet(myScene, transform.position, target->transform.position);
-				bullet->Tag("EnemyAttack");
-				bullet->HitTag("Player");
-				myScene->LoadActor(bullet);
-
-				cooldown = 0.3f;
-			}
-			else {
-				Granade* granade = new Granade(myScene, transform.position, target->transform.position);
-				granade->Tag("EnemyAttack");
-				granade->HitTag("Player");
-				myScene->LoadActor(granade);
-
-				cooldown = 0.7f;
-			}
+			cooldown = 0.7f;
 		}
 
 		if (time >= duration || playerDistance > shootDistance) {
@@ -138,24 +120,12 @@ void Enemy::Update()
 	}
 }
 
-void Enemy::OnCollisionEnter(Collider* other)
+void Bombardier::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "Attack") {
 
-		player->AddScore(100); //sumamos al player una puntuacionn de 100 por cada enemigo matado
+		player->AddScore(200); //sumamos al player una puntuacionn de 100 por cada enemigo matado
 
 		toDelete = true; //lo eliminamos
 	}
-}
-
-void Enemy::SeekDirection()
-{
-	Vector2 newDirection = target->transform.position - transform.position;
-
-	direction = newDirection.Normalized();
-}
-
-void Enemy::RandomDuration()
-{
-	duration = minDuration + (rand() / (float)RAND_MAX) * (maxDuration - minDuration);
 }

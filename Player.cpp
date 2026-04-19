@@ -74,7 +74,7 @@ void Player::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
-		LoseHealth(1); //Llamamos a la funcion LoseHealth()
+		//LoseHealth(1); //Llamamos a la funcion LoseHealth()
 
 		//Si la vida es menor o igual a 0
 		if (health <= 0) {

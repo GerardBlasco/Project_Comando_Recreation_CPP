@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Camera.h"
 #include "Enemy.h"
+#include "Bombardier.h"
 #include "SDL3/SDL.h"
 #include "InputSystem.h"
 #include "Pickeable.h"
@@ -20,6 +21,7 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	GI->LoadImage("bullet.png");
 	GI->LoadImage("granade.png");
 	GI->LoadImage("enemy.png");
+	GI->LoadImage("bombardier.png");
 	GI->LoadImage("bullet_explosion.png");
 	GI->LoadImage("explosion.png");
 	GI->LoadImage("granade_stack.png");
@@ -71,8 +73,10 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	actors.push_back(mainCamera);
 
 	Enemy* enemy = new Enemy(this, player);
-
 	actors.push_back(enemy);
+
+	Enemy* bombardier = new Bombardier(this, player);
+	actors.push_back(bombardier);
 
 	Pickeable* pickeable = new Pickeable(this, player);
 
