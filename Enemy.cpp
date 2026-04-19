@@ -5,9 +5,12 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Granade.h";
+#include "AudioManager.h"
 
 Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 {
+	AudioManager::instance().init(); //Inicializamos sound Manager
+
 	this->player = target; //se guarda el player
 	this->target = target;
 
@@ -46,6 +49,11 @@ Enemy::Enemy(Scene* myScene, Player* target):Actor(myScene)
 	animator->GenerateAnimationsRange("enemy.png", "Walk", sheetOrder, 0, 0, 6, 8, 4, 40.f, 40.f);
 	animator->GenerateAnimationsRange("enemy.png", "Idle", sheetOrder, 96, 0, 6, 8, 2, 40.f, 40.f, 0.5f);
 	animator->LoadDirectionsOrder(directions);
+}
+
+Enemy::~Enemy()
+{
+	//AudioManager::instance().close();//Cerramos la instancia al audioManager
 }
 
 void Enemy::Update()
@@ -130,6 +138,10 @@ void Enemy::OnCollisionEnter(Collider* other)
 	if (other->Parent()->tag == "Attack") {
 
 		player->AddScore(100); //sumamos al player una puntuacionn de 100 por cada enemigo matado
+
+		//Sonido de enemigo muerto
+		AudioManager::instance().playSFX("death_enemy_sound.mp3");
+		AudioManager::instance().setSFXVolume(55);
 
 		toDelete = true; //lo eliminamos
 		

@@ -6,9 +6,11 @@
 #include "IntroScene.h"
 #include "MenuScene.h"
 #include <Windows.h>
+#include "AudioManager.h"
 
 Game* Game::instance = 0;
 float Game::deltaTime = 0.0f;
+int Game::globalHighScore = 0; //guardamos la HighScore aqui para que no se borre en cuanto cambiemos de escenas
 
 void Game::Create()
 {
@@ -35,6 +37,7 @@ void Game::ChangeScene(Scene* newScene)
 
 float Game::DeltaTime()
 {
+	
 	return deltaTime;
 }
 
@@ -46,15 +49,20 @@ void Game::Play()
 
 Game::Game()
 {
+	AudioManager::instance().init(); //Inicializamops el audioManager
+
 	GI = new GraphicsInterface();
 	currentScene = new MenuScene(GI);
 
-	InputSystem::CreateMap("Pause");
-	InputSystem::Map("Pause")->AddBinding(SDLK_ESCAPE);
+	//Añadimos sonido de fondo
+	AudioManager::instance().playMusic("bg_sound.mp3"); //Instanciamos la musica
+	AudioManager::instance().setMusicVolume(20);//seteamos un volumen
+
 }
 
 Game::~Game()
 {
+	//AudioManager::instance().close();//Cerramos la instancia al audioManager
 	delete GI;
 }
 

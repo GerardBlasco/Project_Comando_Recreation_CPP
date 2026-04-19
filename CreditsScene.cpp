@@ -5,10 +5,12 @@
 
 CreditsScene::CreditsScene(GraphicsInterface* GI):Scene(GI)
 {
+	//Mapping tecla ENTER
 	InputSystem::CreateMap("GoBackToMainMenu");
 	InputSystem::Map("GoBackToMainMenu")->AddBinding(SDLK_RETURN);
 	InputSystem::Map("GoBackToMainMenu")->AddListener(this, &CreditsScene::HandleInput, InputEvent::Triggered);
 
+	//Mostramos por pantalla los textos y las opciones
 	actors.push_back(new Text(this, "Juego basado en el Commando Commodore 64", Vector2(100, 120)));
 	actors.push_back(new Text(this, "Creadores: Gerard Blasco e Iris Frades", Vector2(100, 160)));
 	actors.push_back(new Text(this, "Professor: Francisco Arias", Vector2(100, 200)));
@@ -22,5 +24,5 @@ CreditsScene::~CreditsScene()
 
 void CreditsScene::HandleInput()
 {
-	Game::ChangeScene(new MenuScene(GI));
+	Game::ChangeScene(new MenuScene(GI)); //Cambio de escena a menuScene
 }

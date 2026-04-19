@@ -5,6 +5,7 @@
 class Game
 {
 public:
+
 	static void Create();
 	static void Play();
 	static void Destroy();
@@ -12,6 +13,9 @@ public:
 	static void ChangeScene(Scene* newScene);
 
 	static float DeltaTime();
+	static int globalHighScore;
+
+
 
 private:
 	static Game* instance;

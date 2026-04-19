@@ -38,18 +38,22 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	InputSystem::Map("PrimaryAttack")->AddBinding(SDL_BUTTON_LEFT);
 	InputSystem::Map("SecondaryAttack")->AddBinding(SDL_BUTTON_RIGHT);
 
+	//El push back es para que se muestre por pantalla todo aquello que tu indiques
+	//FONDO DEL MAPA
 	Background* map = new Background(this, "first_zone_map.png", 640, 3120);
 	map->AlignToBottom();
 	actors.push_back(map);
 
-
+	//PLAYER
 	Player* player = new Player(this);
 
+	//HUD
 	HUD* hud = new HUD(this, player);
 	actors.push_back(hud);
 
 	actors.push_back(player);
 
+	//COLLIDERS DEL MUNDO
 	WorldBarrier* leftBarrier = new WorldBarrier(this, map, player, Vector2(50, 200), Vector2(640, 3120), false);
 	leftBarrier->AlignLeft();
 	actors.push_back(leftBarrier);
@@ -66,18 +70,19 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	topBarrier->AlignTop();
 	actors.push_back(topBarrier);
 
+	//CAMARA
 	mainCamera = new Camera(this, player);
 	mainCamera->HorizontalMovement(false);
 	actors.push_back(mainCamera);
 
+	//ENEMIGO
 	Enemy* enemy = new Enemy(this, player);
-
 	actors.push_back(enemy);
 
+	//OBJETO PICKEABLE
 	Pickeable* pickeable = new Pickeable(this, player);
-
 	actors.push_back(pickeable);
 
-	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
-	//actors.push_back(sprite);
 }
+
+

@@ -52,6 +52,7 @@ void DefeatScene::HandleInput()
 		selectedOption = 0;
 	}
 
+	//Opciones que puede escojer el usuario
 	menuOption1->SetContent(selectedOption == 0 ? "> Try again" : "Try again");
 	menuOption2->SetContent(selectedOption == 1 ? "> Return to lobby" : "Return to lobby");
 }
@@ -61,10 +62,10 @@ void DefeatScene::ChangeToScene()
 	switch (selectedOption)
 	{
 	case 0:
-		Game::ChangeScene(new IntroScene(GI));
+		Game::ChangeScene(new IntroScene(GI)); //Cambio de escena a introScene, al juego de nuevo
 		break;
 	case 1:
-		Game::ChangeScene(new MenuScene(GI));
+		Game::ChangeScene(new MenuScene(GI)); //Cambio de escena al menuScene
 	default:
 		break;
 	}

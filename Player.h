@@ -11,7 +11,7 @@ public:
 	int granadesLeft;
 
 	Player(class Scene* myScene);
-	//~Player();
+	~Player();
 
 	void LoseHealth(const int quantity);
 	void PickUp();

@@ -13,12 +13,15 @@
 #include "Animator.h"
 #include "DefeatScene.h"
 #include "PauseMenu.h"
+#include "IntroScene.h"
+#include "AudioManager.h"
 
 Player::Player(Scene* myScene):Actor(myScene)
 {
-	health = 5;
-	granadesLeft = 5;
+	AudioManager::instance().init(); //Inicializamos el audioManager
 
+	health = 5; //vida inicial
+	granadesLeft = 5;//granadas iniciales
 
 	AddComponent(new RectangleCollider(this, 40, 40, Color(0, 0, 255, 255)));
 
@@ -64,6 +67,11 @@ Player::Player(Scene* myScene):Actor(myScene)
 	InputSystem::Map("SecondaryAttack")->AddListener(this, &Player::ShootAlternative, InputEvent::Triggered);
 }
 
+Player::~Player()
+{
+	//AudioManager::instance().close(); //Cerramos la instancia al audioManager
+}
+
 //METODOS PARA LA VIDA
 void Player::LoseHealth(const int quantity)
 {
@@ -74,10 +82,18 @@ void Player::OnCollisionEnter(Collider* other)
 {
 	if (other->Parent()->tag == "EnemyAttack") //Los ataques del enemigo
 	{
+		//Sonido cuando hacen daño al player
+		AudioManager::instance().playSFX("hurted_sound.mp3");
+		AudioManager::instance().setSFXVolume(10);
+
 		LoseHealth(1); //Llamamos a la funcion LoseHealth()
 
 		//Si la vida es menor o igual a 0
 		if (health <= 0) {
+			//Sonido de derrota
+			AudioManager::instance().playSFX("lose_sound.mp3");
+			AudioManager::instance().setSFXVolume(30);
+
 			Game::ChangeScene(new DefeatScene(myScene->GI)); //cambiamos a la escena de derrota
 		}
 	}
@@ -166,6 +182,10 @@ void Player::MoveVertical()
 //METODOS DE DISPARO DEL PERSONAJE
 void Player::Shoot()
 {
+	//Añadimos sonido al disparo
+	AudioManager::instance().playSFX("shoot_sound.mp3");
+	AudioManager::instance().setSFXVolume(60);
+
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
 
 	Weapon* bullet = new Bullet(myScene, transform.position, mouseWorldPosition);
@@ -174,7 +194,12 @@ void Player::Shoot()
 
 void Player::ShootAlternative()
 {
+
 	if (granadesLeft <= 0) return; //si no tiene granadas, salimos del metodo
+
+	// Añadimos sonido al disparo granada
+	AudioManager::instance().playSFX("granade_shoot.mp3");
+	AudioManager::instance().setSFXVolume(60);
 
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
 

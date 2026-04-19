@@ -8,6 +8,8 @@ class Enemy : public Actor
 public:
 	Enemy(class Scene* myScene, class Player* target);
 
+	~Enemy();
+
 	virtual void Update();
 
 	virtual void OnCollisionEnter(class Collider* other);

@@ -6,10 +6,12 @@
 
 HelpScene::HelpScene(GraphicsInterface* GI):Scene(GI)
 {
+	//Mapping del ENTER
 	InputSystem::CreateMap("GoBack");
 	InputSystem::Map("GoBack")->AddBinding(SDLK_RETURN);
 	InputSystem::Map("GoBack")->AddListener(this, &HelpScene::HandleInput, InputEvent::Triggered);
 
+	//Textos que se van a mostrar por pantalla
 	actors.push_back(new Text(this, "Bienvenido al menu de ayuda, te muestro los bindings que se usan en este juego: ", Vector2(100, 120)));
 	actors.push_back(new Text(this, "Movimiento del personaje: WASD", Vector2(100, 160)));
 	actors.push_back(new Text(this, "Disparo de el arma principal: Click derecho", Vector2(100, 200)));
@@ -24,5 +26,5 @@ HelpScene::~HelpScene()
 
 void HelpScene::HandleInput()
 {
-	Game::ChangeScene(new MenuScene(GI));
+	Game::ChangeScene(new MenuScene(GI)); //Volvemos a la menuScene
 }
