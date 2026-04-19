@@ -46,6 +46,7 @@ int Animator::GetCurrentIndex()
 
 void Animator::Render()
 {
+	if (!currentAnimation) return;
 	currentAnimation->Render();
 }
 

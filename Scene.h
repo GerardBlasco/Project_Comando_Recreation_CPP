@@ -39,7 +39,7 @@ public:
 	virtual void HandleInput();
 	virtual void ChangeToScene();
 
-	bool ColliderStillExists(RectangleCollider* collider);
+	bool ColliderStillExists(class RectangleCollider* collider);
 
 	std::vector<class Actor*> GetAllActors();
 

@@ -142,6 +142,7 @@
     <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="DefeatScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FreedomForGerardBlasco.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="DefeatScene.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemySpawner.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Frame.h" />
