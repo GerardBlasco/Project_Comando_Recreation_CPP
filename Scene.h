@@ -1,8 +1,11 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "GraphicsInterface.h"
 #include "InputSystem.h"
 #include "Camera.h"
+#include "WorldObstacle.h"
+#include "MapData.h"
 
 class Scene
 {
@@ -11,6 +14,11 @@ protected:
 	std::vector<class Actor*> actors;
 	std::vector<class RectangleCollider*> existingColliders;
 	std::vector<class RectangleCollider*> collidersToDelete;
+
+	MapData currentData;
+	class Background* background;
+
+	void GenerateObstacles();
 
 public:
 	GraphicsInterface* GI;

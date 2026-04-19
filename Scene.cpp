@@ -1,10 +1,13 @@
 #include "Scene.h"
 #include "Actor.h"
 #include "RectangleCollider.h"
+#include "ObstacleData.h"
 #include "Game.h"
+#include "Background.h"
 Scene::Scene(GraphicsInterface* GI)
 {
 	this->GI = GI;
+
 }
 
 Scene::~Scene()
@@ -55,6 +58,45 @@ void Scene::Render()
 {
 	for (Actor* actor : actors) {
 		actor->Render();
+	}
+}
+
+void Scene::GenerateObstacles()
+{
+	float offsetX = background ? background->transform.position.x - (background->width * 0.5f) : 0;
+	float offsetY = background ? background->transform.position.y - (background->height * 0.5f) : 0;
+
+	for (int y = 0; y < currentData.height; y++)
+	{
+		for (int x = 0; x < currentData.width; x++)
+		{
+			int tileID = currentData.data[y * currentData.width + x];
+
+			if (tileID < 0 || tileID >= ObstacleData::Count())
+				continue;
+
+			const ObstacleData& data = ObstacleData::Get(tileID);
+
+			if (data.name == "") {
+				continue;
+			}
+				
+			Vector2 pos(
+				offsetX + x * currentData.tileSize,
+				offsetY + y * currentData.tileSize
+			);
+
+			WorldObstacle* obstacle = new WorldObstacle(
+				this,
+				data.name,
+				pos,
+				data.size
+			);
+
+			obstacle->AddComponent(new RectangleCollider(obstacle, data.size.x, data.size.y, true));
+
+			LoadActor(obstacle);
+		}
 	}
 }
 

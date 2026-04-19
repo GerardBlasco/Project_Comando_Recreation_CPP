@@ -152,7 +152,9 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="MapFirstZone.cpp" />
     <ClCompile Include="MenuScene.cpp" />
+    <ClCompile Include="ObstacleData.cpp" />
     <ClCompile Include="Parameters.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Pickeable.cpp" />
@@ -194,7 +196,10 @@
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="MapData.h" />
+    <ClInclude Include="MapFirstZone.h" />
     <ClInclude Include="MenuScene.h" />
+    <ClInclude Include="ObstacleData.h" />
     <ClInclude Include="Parameters.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Pickeable.h" />
@@ -204,6 +209,7 @@
     <ClInclude Include="Sniper.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="TileType.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Weapon.h" />
