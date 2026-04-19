@@ -2,6 +2,7 @@
 #include "Actor.h"
 #include "Scene.h"
 #include <iostream>
+#include "Game.h"
 
 RectangleCollider::RectangleCollider(Actor* parent, float width, float height, bool isRigid):Collider(parent, width, height, isRigid)
 {
@@ -27,6 +28,10 @@ void RectangleCollider::Update()
 
 void RectangleCollider::Render()
 {
+	if (!parent->myScene->debug) {
+		return;
+	}
+
 	Vector2 screenPos = leftTop - parent->myScene->mainCamera->transform.position + Camera::GetScreenCenter();
 	parent->myScene->GI->DrawRectangle(screenPos.x, screenPos.y, width, height, color);
 }

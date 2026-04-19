@@ -16,6 +16,9 @@
 #include "WorldObstacle.h"
 #include "MapFirstZone.h"
 #include "EnemySpawner.h"
+#include "MapChanger.h"
+#include "MapSideObject.h"
+#include "SecondScene.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -50,6 +53,22 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	map->AlignToBottom();
 	actors.push_back(map);
 	this->background = map;
+
+	MapSideObject* leftObj = new MapSideObject(this, map, true, Vector2(250, 150));
+	leftObj->SetPosition(-925.f);
+	actors.push_back(leftObj);
+
+	MapSideObject* rightObj = new MapSideObject(this, map, false, Vector2(250, 150));
+	rightObj->SetPosition(-925.f);
+	actors.push_back(rightObj);
+
+	MapChanger* changer = new MapChanger(this);
+
+	float mapTop = map->transform.position.y - (map->height * 0.5f);
+
+	changer->transform.position = Vector2(map->transform.position.x,mapTop + 50);
+
+	actors.push_back(changer);
 
 	currentData = MapFirstZone::Get();
 	GenerateObstacles();
@@ -94,4 +113,5 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	actors.push_back(spawner);
 
 	Pickeable* pickeable = new Pickeable(this, player);
+	actors.push_back(pickeable);
 }

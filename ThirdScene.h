@@ -3,6 +3,7 @@
 
 class ThirdScene: public Scene
 {
+public:
 	ThirdScene(GraphicsInterface* GI);
 };
 
