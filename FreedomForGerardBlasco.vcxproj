@@ -104,12 +104,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Usuario\Downloads\ProyectoCPP\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\include;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\include;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\include;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\include;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Usuario\Downloads\ProyectoCPP\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\lib\x64;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL3_mixer-devel-3.2.0-VC\SDL3_mixer-3.2.0\lib\x64;$(ProjectDir)..\SDL3_ttf-devel-3.2.2-VC\SDL3_ttf-3.2.2\lib\x64;$(ProjectDir)..\SDL3_image-devel-3.2.6-VC\SDL3_image-3.2.6\lib\x64;$(ProjectDir)..\SDL3-devel-3.4.0-VC\SDL3-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL3_mixer.lib;SDL3.lib;SDL3_image.lib;SDL3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
