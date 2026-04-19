@@ -47,17 +47,17 @@ void HUD::Render()
 	myScene->GI->DrawText(ss.str(), 220, 600);
 
 	Transform t;
-	t.position = { 400, 620 };   // posicion en pantalla
+	t.position = { 320, 620 };   // posicion en pantalla
 	t.rotation = 0;            // sin rotacion
 	t.scale = { 1, 1 };          // escala normal
 
 	//Mostrar granadas que tiene
 	myScene->GI->DrawSprite("icon_granade.png", t, 40, 40);
-	myScene->GI->DrawText("= ", 430, 600);
+	myScene->GI->DrawText("= ", 380, 600);
 
 	std::stringstream ss4;
 	ss4 << granadesQuantity;
-	myScene->GI->DrawText(ss4.str(), 450, 600);
+	myScene->GI->DrawText(ss4.str(), 430, 600);
 
 	//Mostrar vidas
 	myScene->GI->DrawText("MEN: ", 500, 600);
@@ -70,6 +70,6 @@ void HUD::Render()
 	myScene->GI->DrawText("HI: ", 700, 600);
 
 	std::stringstream ss2;
-	ss2 << Game::globalHighScore; //imprimimos los datos de game de highScore
+	ss2 << Game::globalHighScore; //imprimimos los datos de game de highSore
 	myScene->GI->DrawText(ss2.str(), 800, 600);
 }

@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "MenuScene.h"
 #include "IntroScene.h"
+#include "VictoryScene.h"
 
 PauseMenu::PauseMenu(Scene* scene): Actor(scene)
 {
@@ -64,6 +65,7 @@ void PauseMenu::HandleInputs()
 	}
 
 }
+
 
 void PauseMenu::ShowCanvas()
 {

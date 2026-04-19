@@ -7,17 +7,17 @@
 
 DefeatScene::DefeatScene(GraphicsInterface* GI): Scene(GI)
 {
-	InputSystem::CreateMap("VictorySceneInputs");
+	InputSystem::CreateMap("DefeatSceneInputs");
 	InputSystem::CreateMap("ChangeToSelectedOption");
 
 	//De derecha a izquierda
-	InputSystem::Map("VictorySceneInputs")->AddBinding(SDLK_A);
-	InputSystem::Map("VictorySceneInputs")->AddBinding(SDLK_D, true);
+	InputSystem::Map("DefeatSceneInputs")->AddBinding(SDLK_A);
+	InputSystem::Map("DefeatSceneInputs")->AddBinding(SDLK_D, true);
 
 	//Aceptar seleccion
 	InputSystem::Map("ChangeToSelectedOption")->AddBinding(SDLK_RETURN);
 
-	InputSystem::Map("VictorySceneInputs")->AddListener(this, &DefeatScene::HandleInput, InputEvent::Triggered);
+	InputSystem::Map("DefeatSceneInputs")->AddListener(this, &DefeatScene::HandleInput, InputEvent::Triggered);
 	InputSystem::Map("ChangeToSelectedOption")->AddListener(this, &DefeatScene::ChangeToScene, InputEvent::Triggered);
 
 	//Asignamos cada opcion a cada variable
@@ -32,7 +32,7 @@ DefeatScene::DefeatScene(GraphicsInterface* GI): Scene(GI)
 }
 void DefeatScene::HandleInput()
 {
-	float value = InputSystem::Map("VictorySceneInputs")->ReadFloat(); //Lee el float de ese input -1 o 1
+	float value = InputSystem::Map("DefeatSceneInputs")->ReadFloat(); //Lee el float de ese input -1 o 1
 
 	//Segun el valor...
 	if (value > 0)

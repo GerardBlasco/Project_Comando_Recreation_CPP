@@ -12,13 +12,13 @@ public:
 
 	virtual void Update();
 
-	virtual void OnCollisionEnter(class Collider* other);
+	virtual void OnCollisionEnter(class Collider* other); 
 
 	Player* player; //puntero al player
 
 private:
-	Vector2 direction;
-	class Player* target;
+	Vector2 direction; //Direccion del enemigo
+	class Player* target; //Target es el player
 	EnemyState state = EnemyState::Thinking;
 
 	class Animator* animator;
