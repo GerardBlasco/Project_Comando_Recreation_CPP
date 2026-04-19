@@ -13,6 +13,7 @@
 #include "Animator.h"
 #include "DefeatScene.h"
 #include "PauseMenu.h"
+#include "AudioManager.h"
 
 Player::Player(Scene* myScene):Actor(myScene)
 {
@@ -206,6 +207,10 @@ void Player::MoveVertical()
 //METODOS DE DISPARO DEL PERSONAJE
 void Player::Shoot()
 {
+
+	AudioManager::instance().playSFX("shoot_sound.mp3");
+	AudioManager::instance().setSFXVolume(30);
+
 	Vector2 mouseWorldPosition = Camera::ScreenToWorld(Vector2(InputSystem::DeltaX(), InputSystem::DeltaY()), myScene->mainCamera);
 
 	Weapon* bullet = new Bullet(myScene, transform.position, mouseWorldPosition);

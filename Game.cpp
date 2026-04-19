@@ -6,9 +6,11 @@
 #include "IntroScene.h"
 #include "MenuScene.h"
 #include <Windows.h>
+#include "AudioManager.h"
 
 Game* Game::instance = 0;
 float Game::deltaTime = 0.0f;
+//int Game::globalHighScore = 0;
 
 void Game::Create()
 {
@@ -46,11 +48,16 @@ void Game::Play()
 
 Game::Game()
 {
+	AudioManager::instance().init();
+
 	GI = new GraphicsInterface();
 	currentScene = new MenuScene(GI);
 
 	InputSystem::CreateMap("Pause");
 	InputSystem::Map("Pause")->AddBinding(SDLK_ESCAPE);
+
+	AudioManager::instance().playMusic("bg_sound.mp3");
+	AudioManager::instance().setMusicVolume(60);
 }
 
 Game::~Game()

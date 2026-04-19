@@ -13,6 +13,8 @@ public:
 
 	static float DeltaTime();
 
+	//int globalHighScore;
+
 private:
 	static Game* instance;
 
