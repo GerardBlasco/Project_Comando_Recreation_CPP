@@ -100,15 +100,6 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	mainCamera->HorizontalMovement(false);
 	actors.push_back(mainCamera);
 
-	//Enemy* enemy = new Enemy(this, player);
-	//actors.push_back(enemy);
-
-	//Enemy* bombardier = new Bombardier(this, player);
-	//actors.push_back(bombardier);
-
-	//Enemy* sniper = new Sniper(this, player);
-	//actors.push_back(sniper);
-
 	EnemySpawner* spawner = new EnemySpawner(this, player);
 	actors.push_back(spawner);
 

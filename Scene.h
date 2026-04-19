@@ -27,7 +27,7 @@ public:
 	bool waitingSceneChange = false;
 	Scene* nextScene;
 
-	bool debug = true;
+	bool debug = false; //para que no se vean los colliders
 
 	Scene(GraphicsInterface* GI);
 	virtual ~Scene();

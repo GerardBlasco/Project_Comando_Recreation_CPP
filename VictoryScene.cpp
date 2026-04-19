@@ -5,7 +5,7 @@
 #include "IntroScene.h"
 #include "VictoryScene.h"
 
-VictoryScene::VictoryScene(GraphicsInterface* GI)
+VictoryScene::VictoryScene(GraphicsInterface* GI): Scene (GI)
 {
 	InputSystem::CreateMap("VictorySceneInputs");
 	InputSystem::CreateMap("ChangeToOptionsSelected");
@@ -17,8 +17,8 @@ VictoryScene::VictoryScene(GraphicsInterface* GI)
 	//Aceptar seleccion
 	InputSystem::Map("ChangeToOptionsSelected")->AddBinding(SDLK_RETURN);
 
-	InputSystem::Map("VictorySceneInputs")->AddListener(this, &DefeatScene::HandleInput, InputEvent::Triggered);
-	InputSystem::Map("ChangeToOptionsSelected")->AddListener(this, &DefeatScene::ChangeToScene, InputEvent::Triggered);
+	InputSystem::Map("VictorySceneInputs")->AddListener(this, &VictoryScene::Inputs, InputEvent::Triggered);
+	InputSystem::Map("ChangeToOptionsSelected")->AddListener(this, &VictoryScene::ChangeScenes, InputEvent::Triggered);
 
 	//Asignamos cada opcion a cada variable
 	menuOption1 = new Text(this, "> Play again", Vector2(200, 500));

@@ -172,6 +172,8 @@
     <ClCompile Include="ThirdScene.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="VictoryChanger.cpp" />
+    <ClCompile Include="VictoryScene.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WorldBarrier.cpp" />
     <ClCompile Include="WorldObstacle.cpp" />
@@ -224,6 +226,8 @@
     <ClInclude Include="TileType.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="VictoryChanger.h" />
+    <ClInclude Include="VictoryScene.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WorldBarrier.h" />
     <ClInclude Include="WorldObstacle.h" />

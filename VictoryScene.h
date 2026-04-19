@@ -5,7 +5,7 @@ class VictoryScene : public Scene
 {
 public:
 	VictoryScene(GraphicsInterface* GI);
-	virtual ~VictoryScene();
+	//virtual ~VictoryScene();
 	virtual void Inputs();
 	virtual void ChangeScenes();
 
