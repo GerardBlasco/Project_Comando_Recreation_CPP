@@ -9,7 +9,6 @@ GraphicsInterface::GraphicsInterface()
 	SDL_Init(SDL_INIT_VIDEO);
 	TTF_Init(); // Para la fuente del texto
 	SDL_CreateWindowAndRenderer(Parameters::window_title, Parameters::width, Parameters::height, 0, &window, &renderer);
-
 	font = TTF_OpenFont((fontsPath + "VCR_OSD_MONO_1.001.ttf").c_str(), 32); //Fuente de texto
 	if (!font) {
 		std::cout << "No se ha encontrado la fuente";

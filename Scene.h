@@ -27,6 +27,8 @@ public:
 	bool waitingSceneChange = false;
 	Scene* nextScene;
 
+	bool debug = true;
+
 	Scene(GraphicsInterface* GI);
 	virtual ~Scene();
 	virtual void Update();
