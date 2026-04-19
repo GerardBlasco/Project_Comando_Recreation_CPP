@@ -31,7 +31,7 @@ protected:
 
 	float moveSpeed = 200.f;
 
-	void SeekDirection();
+	virtual void SeekDirection();
 	void RandomDuration();
 };
 

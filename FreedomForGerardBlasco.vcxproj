@@ -159,6 +159,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RectangleCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Sniper.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RectangleCollider.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Sniper.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Transform.h" />

@@ -11,6 +11,11 @@ Weapon::Weapon(Scene* myScene, Vector2 originPos, Vector2 targetPos) :Actor(mySc
 	tag = "Attack";
 }
 
+void Weapon::SetSpeed(float speed)
+{
+	this->speed = speed;
+}
+
 void Weapon::HitTag(std::string hitTag)
 {
 	this->hitTag = hitTag;

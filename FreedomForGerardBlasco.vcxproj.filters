@@ -123,6 +123,9 @@
     <ClCompile Include="Bombardier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sniper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -240,6 +243,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bombardier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -60,3 +60,8 @@ void Bullet::OnCollisionEnter(Collider* other)
 		myScene->LoadActor(explosion);
 	}
 }
+
+void Bullet::SetMaxDistance(float maxDistance)
+{
+	this->maxDistance = maxDistance;
+}
