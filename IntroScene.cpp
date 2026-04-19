@@ -15,6 +15,7 @@
 #include "WorldBarrier.h"
 #include "WorldObstacle.h"
 #include "MapFirstZone.h"
+#include "EnemySpawner.h"
 
 IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 {
@@ -80,17 +81,17 @@ IntroScene::IntroScene(GraphicsInterface* GI):Scene(GI)
 	mainCamera->HorizontalMovement(false);
 	actors.push_back(mainCamera);
 
-	Enemy* enemy = new Enemy(this, player);
-	actors.push_back(enemy);
+	//Enemy* enemy = new Enemy(this, player);
+	//actors.push_back(enemy);
 
-	Enemy* bombardier = new Bombardier(this, player);
-	actors.push_back(bombardier);
+	//Enemy* bombardier = new Bombardier(this, player);
+	//actors.push_back(bombardier);
 
-	Enemy* sniper = new Sniper(this, player);
-	actors.push_back(sniper);
+	//Enemy* sniper = new Sniper(this, player);
+	//actors.push_back(sniper);
+
+	EnemySpawner* spawner = new EnemySpawner(this, player);
+	actors.push_back(spawner);
 
 	Pickeable* pickeable = new Pickeable(this, player);
-
-	//Sprite* sprite = new Sprite(this, "UFO.png", 100);
-	//actors.push_back(sprite);
 }
