@@ -14,6 +14,8 @@ public:
 	static InputMap* Map(const std::string name);
 
 	static void Update();
+	static void ClearMaps();
+	static void ClearListeners();
 	
 	static void Delta(float &x, float &y);
 	static float DeltaX();

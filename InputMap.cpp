@@ -94,6 +94,11 @@ void InputMap::ToggleTrigger()
     }
 }
 
+void InputMap::ClearListeners()
+{
+    listeners.clear();
+}
+
 float InputMap::ReadFloat()
 {
     return value;

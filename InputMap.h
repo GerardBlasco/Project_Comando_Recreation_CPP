@@ -25,6 +25,8 @@ public:
 		});
 	}
 
+	void ClearListeners();
+
 	void CheckIfKeyPressed(std::map<int, bool> &keyDown);
 
 	float ReadFloat();

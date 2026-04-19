@@ -26,12 +26,15 @@ void Game::Destroy()
 
 void Game::ChangeScene(Scene* newScene)
 {
+	//InputSystem::ClearListeners();
+	
 	if (instance->currentScene) {
 		delete instance->currentScene;
 	}
 
 	instance->currentScene = newScene;
 
+	//InputSystem::ClearMaps();
 	InputSystem::ResetInputs();
 }
 

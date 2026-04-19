@@ -41,6 +41,26 @@ void InputSystem::Update()
 	UpdateMaps();
 }
 
+void InputSystem::ClearMaps()
+{
+	for (auto& pair : maps) {
+		delete pair.second;
+	}
+
+	maps.clear();
+	mapsToDelete.clear();
+	keyDown.clear();
+}
+
+void InputSystem::ClearListeners()
+{
+	for (auto& pair : maps)
+	{
+		if (pair.second)
+			pair.second->ClearListeners();
+	}
+}
+
 void InputSystem::Delta(float& x, float& y)
 {
 	x = deltaX;

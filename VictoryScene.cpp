@@ -7,6 +7,7 @@
 
 VictoryScene::VictoryScene(GraphicsInterface* GI): Scene (GI)
 {
+	//InputSystem::ClearMaps();
 	InputSystem::CreateMap("VictorySceneInputs");
 	InputSystem::CreateMap("ChangeToOptionsSelected");
 
@@ -58,6 +59,9 @@ void VictoryScene::Inputs()
 
 void VictoryScene::ChangeScenes()
 {
+	//InputSystem::ClearListeners();
+	//InputSystem::ClearMaps();
+
 	switch (selectedOption)
 	{
 	case 0:

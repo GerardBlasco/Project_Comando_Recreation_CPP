@@ -10,6 +10,9 @@ VictoryChanger::VictoryChanger(Scene* myScene):MapChanger(myScene)
 void VictoryChanger::OnCollisionEnter(class Collider* other)
 {
 	if (other->Parent()->tag == "Player") {
+		//InputSystem::ClearListeners();
+		//InputSystem::ClearMaps();
+
 		myScene->waitingSceneChange = true;
 		myScene->nextScene = new VictoryScene(myScene->GI);
 	}

@@ -7,6 +7,7 @@
 
 DefeatScene::DefeatScene(GraphicsInterface* GI): Scene(GI)
 {
+	InputSystem::ClearMaps();
 	InputSystem::CreateMap("DefeatSceneInputs");
 	InputSystem::CreateMap("ChangeToSelectedOption");
 

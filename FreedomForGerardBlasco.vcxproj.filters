@@ -150,10 +150,10 @@
     <ClCompile Include="ThirdScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VictoryScene.cpp">
+    <ClCompile Include="VictoryChanger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VictoryChanger.cpp">
+    <ClCompile Include="VictoryScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,10 +308,10 @@
     <ClInclude Include="ThirdScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VictoryScene.h">
+    <ClInclude Include="VictoryChanger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VictoryChanger.h">
+    <ClInclude Include="VictoryScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
